@@ -425,8 +425,11 @@
     </Component>
     <Component class="javax.swing.JButton" name="botonVolver">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Volver"/>
+        <Property name="text" type="java.lang.String" value="Ocultar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonVolverActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="boton2Cambiar">
       <Properties>

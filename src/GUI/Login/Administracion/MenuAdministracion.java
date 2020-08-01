@@ -72,6 +72,11 @@ public class MenuAdministracion extends javax.swing.JFrame {
         contentMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         contentMenuItem.setMnemonic('c');
         contentMenuItem.setText("Ver Personal");
+        contentMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contentMenuItemActionPerformed(evt);
+            }
+        });
         helpMenu.add(contentMenuItem);
 
         menuBar.add(helpMenu);
@@ -110,6 +115,11 @@ public class MenuAdministracion extends javax.swing.JFrame {
        Proveedores ventana = new Proveedores();
        ventana.setVisible(true);
     }//GEN-LAST:event_cutMenuItemActionPerformed
+
+    private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentMenuItemActionPerformed
+       Personal ventana = new Personal();
+       ventana.setVisible(true);
+    }//GEN-LAST:event_contentMenuItemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

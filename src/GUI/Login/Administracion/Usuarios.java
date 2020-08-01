@@ -38,13 +38,19 @@ public class Usuarios extends javax.swing.JFrame {
 
     public void reiniciarTabla() {
         modelo = new TablaModelo();
+        this.filtro.setText("");
+        this.tablaUsuarios.setRowSorter(null);
         asignarDatosUsuarios();
     }
 
     public void asignarDatosUsuarios() {
-        GeneradorModelos.modeloUsuarios(modelo);
-        GeneradorModelos.asignarModeloTabla(modelo, tablaUsuarios);
-        manejadorUsuarios.llenarUsuarios(modelo);
+        try {
+            GeneradorModelos.modeloUsuarios(modelo);
+            GeneradorModelos.asignarModeloTabla(modelo, tablaUsuarios);
+            manejadorUsuarios.llenarUsuarios(modelo);
+        } catch (Exception e) {
+        }
+
     }
 
     public void ocultarDatos() {
@@ -58,13 +64,23 @@ public class Usuarios extends javax.swing.JFrame {
         this.boton2Cambiar.setVisible(false);
     }
 
-    public void cambiarContrasena() {
-        this.labelContrasena.setVisible(true);
-        this.labelConfirmarContrasena.setVisible(true);
-        this.textoContrasena.setVisible(true);
-        this.textoConfirmacionContrasena.setVisible(true);
-        this.boton2Cambiar.setVisible(true);
-        this.botonVolver.setVisible(false);
+    public void cambiarContrasena(boolean valor) {
+        if (valor) {
+
+            this.labelContrasena.setVisible(true);
+            this.labelConfirmarContrasena.setVisible(true);
+            this.textoContrasena.setVisible(true);
+            this.textoConfirmacionContrasena.setVisible(true);
+            this.boton2Cambiar.setVisible(true);
+            this.botonVolver.setVisible(true);
+        } else {
+            this.labelContrasena.setVisible(false);
+            this.labelConfirmarContrasena.setVisible(false);
+            this.textoContrasena.setVisible(false);
+            this.textoConfirmacionContrasena.setVisible(false);
+            this.boton2Cambiar.setVisible(false);
+            this.botonVolver.setVisible(false);
+        }
     }
 
     public void validarCambioContrasena() {
@@ -74,11 +90,17 @@ public class Usuarios extends javax.swing.JFrame {
                 String usuario = this.textoUsuario.getText();
 
                 String contrasena = Md5.getMD5(this.textoContrasena.getText());
-                boolean resultado = manejadorUsuarios.cambiarContrasena(usuario, contrasena);
-                if (resultado) {
-                    JOptionPane.showMessageDialog(null, "Se cambio con exito la contrasena del usuario: " + usuario);
+                if (!usuario.equals("")) {
+
+                    boolean resultado = manejadorUsuarios.cambiarContrasena(usuario, contrasena);
+                    if (resultado) {
+                        JOptionPane.showMessageDialog(null, "Se cambio con exito la contrasena del usuario: " + usuario);
+                        reiniciarEditado();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al intentar cambiar la contrasena en la base de datos");
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Error al intentar cambiar la contrasena en la base de datos");
+                    JOptionPane.showMessageDialog(null, "Error no se selecciono un usuario");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Las contrasenas no pueden estar en blanco");
@@ -87,6 +109,17 @@ public class Usuarios extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Las contrasenas no coinciden, revisalas por favor");
         }
+    }
+
+    public void reiniciarEditado() {
+        this.textoAreaTrabajo.setText("");
+        this.textoConfirmacionContrasena.setText("");
+        this.textoContrasena.setText("");
+        this.textoDpi.setText("");
+        this.textoEstado.setText("");
+        this.textoNombre.setText("");
+        this.textoTipoUsuario.setText("");
+        this.textoUsuario.setText("");
     }
 
     public void editarUsuario() {
@@ -105,8 +138,15 @@ public class Usuarios extends javax.swing.JFrame {
                                     if (resultado) {
                                         reiniciarTabla();
                                         JOptionPane.showMessageDialog(null, "Se cambio con exito la informacion del usuario: " + usuario);
+                                        reiniciarEditado();
                                     } else {
-                                        JOptionPane.showMessageDialog(null, "Error al intentar cambiar la informacion en la base de datos");
+                                        JOptionPane.showMessageDialog(null, "Existieron problemas al crear el usuario: " + usuario + ".\n"
+                                                + "Los problemas pueden ser:\n"
+                                                + "1.- Ya existe el usuario con ese nombre\n"
+                                                + "3.- El nombre sobrepasa los 200 caracteres\n"
+                                                + "3.- El dpi sobrepasa los 13 caracteres o se esta repitiendo\n"
+                                                + "4.- El area de trabajo sobrepasa los 100 caracteres\n");
+
                                     }
 
                                 } else {
@@ -144,6 +184,7 @@ public class Usuarios extends javax.swing.JFrame {
             if (resultado) {
                 JOptionPane.showMessageDialog(null, "Se realizo el cambio de estado al usuario: " + usuario);
                 reiniciarTabla();
+                reiniciarEditado();
             } else {
                 JOptionPane.showMessageDialog(null, "No se pudo realizar el cambio de estado al usuario: " + usuario);
             }
@@ -308,7 +349,12 @@ public class Usuarios extends javax.swing.JFrame {
             }
         });
 
-        botonVolver.setText("Volver");
+        botonVolver.setText("Ocultar");
+        botonVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVolverActionPerformed(evt);
+            }
+        });
 
         boton2Cambiar.setText("Confirmar");
         boton2Cambiar.addActionListener(new java.awt.event.ActionListener() {
@@ -522,29 +568,38 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaUsuariosMouseClicked
 
     private void botonCambiarContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCambiarContrasenaActionPerformed
-        cambiarContrasena();
+        cambiarContrasena(true);
     }//GEN-LAST:event_botonCambiarContrasenaActionPerformed
 
     private void boton2CambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton2CambiarActionPerformed
         validarCambioContrasena();
+
     }//GEN-LAST:event_boton2CambiarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         editarUsuario();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void botonDeshabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDeshabilitarActionPerformed
         cambiarEstadoUsuario(0);
+
     }//GEN-LAST:event_botonDeshabilitarActionPerformed
 
     private void botonHabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonHabilitarActionPerformed
         cambiarEstadoUsuario(1);
+
     }//GEN-LAST:event_botonHabilitarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         CrearUsuario ventana = new CrearUsuario(this, true);
         ventana.setVisible(true);
+        reiniciarTabla();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
+        cambiarContrasena(false);
+    }//GEN-LAST:event_botonVolverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -56,6 +56,7 @@ public class CrearUsuario extends javax.swing.JDialog {
                                                                 + "1.- Ya existe el usuario con ese nombre\n"
                                                                 + "3.- El nombre sobrepasa los 200 caracteres\n"
                                                                 + "3.- El dpi sobrepasa los 13 caracteres o se esta repitiendo\n"
+                                                                + "4.- El area de trabajo sobrepasa los 100 caracteres\n"
                                                                 + "");
                                                     }
                                                 } else {

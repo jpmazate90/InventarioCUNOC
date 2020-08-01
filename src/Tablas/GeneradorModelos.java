@@ -20,6 +20,9 @@ public class GeneradorModelos {
         modelo.addColumn("AREA TRABAJO");
         modelo.addColumn("TIPO USUARIO");
         modelo.addColumn("ESTADO");
+        modelo.addColumn("FECHA CREACION");
+        modelo.addColumn("FECHA EDITADO");
+
     }
     
     public static void modeloProveedores(TablaModelo modelo) {
@@ -28,6 +31,21 @@ public class GeneradorModelos {
         modelo.addColumn("DIRECCION");
         modelo.addColumn("AREA TRABAJO");
         modelo.addColumn("TELEFONO");
+        modelo.addColumn("FECHA CREACION");
+        modelo.addColumn("FECHA EDITADO");
+    }
+    
+    public static void modeloPersonal(TablaModelo modelo) {
+        modelo.addColumn("NO PERSONAL");
+        modelo.addColumn("NOMBRE COMPLETO");
+        modelo.addColumn("FECHA NACIMIENTO");
+        modelo.addColumn("CORREO ELECTRONICO");
+        modelo.addColumn("DPI");
+        modelo.addColumn("PUESTO");
+        modelo.addColumn("ESTADO");
+        modelo.addColumn("AREA TRABAJO");
+        modelo.addColumn("FECHA CREACION");
+        modelo.addColumn("FECHA EDITADO");
     }
     
     

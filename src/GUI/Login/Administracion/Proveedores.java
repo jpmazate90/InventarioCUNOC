@@ -9,6 +9,7 @@ import Logica.ManejadorProveedores;
 import Logica.ManejadorUsuarios;
 import Tablas.GeneradorModelos;
 import Tablas.TablaModelo;
+import java.awt.HeadlessException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -35,15 +36,37 @@ public class Proveedores extends javax.swing.JFrame {
     }
 
     public void asignarDatosProveedores() {
-        GeneradorModelos.modeloProveedores(modelo);
-        GeneradorModelos.asignarModeloTabla(modelo, tablaProveedores);
-        manejadorProveedores.llenarProveedores(modelo);
+        try {
+            GeneradorModelos.modeloProveedores(modelo);
+            GeneradorModelos.asignarModeloTabla(modelo, tablaProveedores);
+            manejadorProveedores.llenarProveedores(modelo);
+        } catch (Exception e) {
+        }
+
     }
 
     public void recargarTabla() {
         modelo = new TablaModelo();
+        this.textoFiltro.setText("");
+        this.tablaProveedores.setRowSorter(null);
         manejadorProveedores = new ManejadorProveedores();
         asignarDatosProveedores();
+    }
+
+    public void borrarDatosCreacion() {
+        this.crearArea.setText("");
+        this.crearDireccion.setText("");
+        this.crearNit.setText("");
+        this.crearNombre.setText("");
+        this.crearTelefono.setText("");
+    }
+
+    public void borrarDatosEditado() {
+        this.textoArea.setText("");
+        this.textoDIreccion.setText("");
+        this.textoNit.setText("");
+        this.textoNombre.setText("");
+        this.textoTelefono.setText("");
     }
 
     public void crearProveedor() {
@@ -67,14 +90,22 @@ public class Proveedores extends javax.swing.JFrame {
                                                     try {
                                                         Integer.parseInt(telefono);
                                                         boolean resultado = manejadorProveedores.crearProveedor(nit, nombre, direccion, area, telefono);
+
                                                         if (resultado) {
                                                             JOptionPane.showMessageDialog(null, "Se creo con exito el proveedor con nit: " + nit);
                                                             recargarTabla();
+                                                            borrarDatosCreacion();
                                                         } else {
-                                                            JOptionPane.showMessageDialog(null, "Problemas para crear al proveeodr con nit: " + nit);
+                                                            JOptionPane.showMessageDialog(null, "Problemas para crear al proveedor con nit: " + nit + "\n"
+                                                                    + "Los errores pueden ser los siguientes:\n"
+                                                                    + "1.- El Nit ya se repite en otro proveedor\n"
+                                                                    + "");
                                                         }
-                                                    } catch (Exception e) {
+                                                    } catch (HeadlessException | NumberFormatException e) {
+                                                        e.printStackTrace();
                                                         JOptionPane.showMessageDialog(null, "Error, en el campo de telefono solo se aceptan numeros");
+                                                    } catch (Exception e) {
+
                                                     }
                                                 } else {
                                                     JOptionPane.showMessageDialog(null, "Error, la longitud del telefono tiene que ser de 8 digitos o menos");
@@ -131,11 +162,16 @@ public class Proveedores extends javax.swing.JFrame {
                                                 boolean resultado = manejadorProveedores.editarProveedor(nit, nombre, direccion, area, telefono);
                                                 if (resultado) {
                                                     JOptionPane.showMessageDialog(null, "Se edito con exito el proveedor con nit: " + nit);
+                                                    borrarDatosEditado();
                                                     recargarTabla();
                                                 } else {
-                                                    JOptionPane.showMessageDialog(null, "Problemas para editar al proveeodr con nit: " + nit);
+                                                    JOptionPane.showMessageDialog(null, "Problemas para editar al proveedor con nit: " + nit + "\n"
+                                                            + "Los errores pueden ser los siguientes:\n"
+                                                            + "1.- El Nit ya se repite en otro proveedor\n"
+                                                            + "2.- El Nit ya esta referenciado en un bien y no se puede editar\n");
                                                 }
                                             } catch (Exception e) {
+                                                e.printStackTrace();
                                                 JOptionPane.showMessageDialog(null, "Error, en el campo de telefono solo se aceptan numeros");
                                             }
                                         } else {
@@ -167,29 +203,30 @@ public class Proveedores extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error, no se selecciono ningun nit");
         }
     }
-    
-    public void eliminarProveedor(){
+
+    public void eliminarProveedor() {
         String nit = this.textoNit.getText();
-        if(!nit.equals("")){
+        if (!nit.equals("")) {
             boolean resultado = manejadorProveedores.eliminarProveedor(nit);
-            if(resultado){
+            if (resultado) {
                 JOptionPane.showMessageDialog(null, "Se elimino correctamente el proveedor");
                 limpiarDatos();
                 recargarTabla();
-            }else{
-            JOptionPane.showMessageDialog(null, "No se puede eliminar el proveedor, puede que ya este referenciado en algun bien");    
+            } else {
+                JOptionPane.showMessageDialog(null, "No se puede eliminar el proveedor, puede que ya este referenciado en algun bien");
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Error, no se selecciono ningun nit para eliminarlo");
         }
     }
-    public void limpiarDatos(){
+
+    public void limpiarDatos() {
         this.textoArea.setText("");
         this.textoDIreccion.setText("");
         this.textoTelefono.setText("");
         this.textoNit.setText("");
         this.textoNombre.setText("");
-        
+
         this.crearArea.setText("");
         this.crearDireccion.setText("");
         this.crearNit.setText("");
@@ -270,7 +307,7 @@ public class Proveedores extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaProveedores);
 
-        tiposFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nit", "Nombre" }));
+        tiposFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nit", "Nombre", "Direccion", "Area de trabajo", "Telefono" }));
         tiposFiltro.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 tiposFiltroItemStateChanged(evt);
@@ -458,10 +495,11 @@ public class Proveedores extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel14)))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(textoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel9)
+                                .addComponent(textoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton2)

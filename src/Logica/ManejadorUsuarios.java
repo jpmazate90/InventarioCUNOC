@@ -33,16 +33,19 @@ public class ManejadorUsuarios {
             declaracion = conexion.prepareStatement("CALL fillUsuarios()");
             ResultSet resultado = declaracion.executeQuery();
             while (resultado.next()) {
-                Object objeto[] = new Object[6];
+                Object objeto[] = new Object[8];
                 objeto[0] = resultado.getString(1);
                 objeto[1] = resultado.getString(2);
                 objeto[2] = resultado.getString(3);
                 objeto[3] = resultado.getString(4);
                 objeto[4] = resultado.getInt(5);
                 objeto[5] = resultado.getInt(6);
+                objeto[6] = resultado.getTimestamp(7);
+                objeto[7] = resultado.getTimestamp(8);
                 modelo.addRow(objeto);
             }
         } catch (SQLException ex) {      
+            ex.printStackTrace();
             JOptionPane.showMessageDialog(null,"Problema al cargar los Usuarios");
         }
     }
