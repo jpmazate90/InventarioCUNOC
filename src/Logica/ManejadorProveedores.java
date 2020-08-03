@@ -96,6 +96,5 @@ public class ManejadorProveedores {
             return false;
         }
     }
-    //probando el push
 
 }

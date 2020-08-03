@@ -48,6 +48,13 @@ public class GeneradorModelos {
         modelo.addColumn("FECHA EDITADO");
     }
     
+     public static void modeloTiposBien(TablaModelo modelo) {
+        modelo.addColumn("CODIGO");
+        modelo.addColumn("NOMBRE");
+        
+    }
+    
+    
     
     
     public static void asignarModeloTabla(TablaModelo modelo, JTable tabla) {
