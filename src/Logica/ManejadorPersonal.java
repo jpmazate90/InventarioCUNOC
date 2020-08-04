@@ -50,6 +50,25 @@ public class ManejadorPersonal {
             JOptionPane.showMessageDialog(null, "Problema al cargar al personal");
         }
     }
+    
+    public void llenarAuxiliarEncaragdo(TablaModelo modelo) {
+        PreparedStatement declaracion;
+        try {
+            declaracion = conexion.prepareStatement("SELECT NOPERSONAL,NOMBRECOMPLETO,DPI,AREATRABAJO FROM PERSONAL WHERE ESTADO=1 ORDER BY NOPERSONAL");
+            ResultSet resultado = declaracion.executeQuery();
+            while (resultado.next()) {
+                Object objeto[] = new Object[4];
+                objeto[0] = resultado.getString(1);
+                objeto[1] = resultado.getString(2);
+                objeto[2] = resultado.getString(3);
+                objeto[3] = resultado.getString(4);
+                modelo.addRow(objeto);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Problema al cargar a los encargados");
+        }
+    }
+    
 
     public boolean crearPersonal(String no, String nombre, String fecha, String correo, String dpi, String puesto, String estado, String area) {
         try {

@@ -50,6 +50,27 @@ public class ManejadorProveedores {
             
         }
     }
+    
+     public void llenarAuxiliarProveedores(TablaModelo modelo) {
+        PreparedStatement declaracion;
+        try {
+            declaracion = conexion.prepareStatement("SELECT NIT, NOMBRE, DIRECCION,AREATRABAJO,TELEFONO FROM PROVEEDOR ORDER BY NIT");
+            ResultSet resultado = declaracion.executeQuery();
+            while (resultado.next()) {
+                Object objeto[] = new Object[5];
+                objeto[0] = resultado.getInt(1);
+                objeto[1] = resultado.getString(2);
+                objeto[2] = resultado.getString(3);
+                objeto[3] = resultado.getString(4);
+                objeto[4] = resultado.getInt(5);
+                modelo.addRow(objeto);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Problema al cargar los proveedores");
+        } catch(Exception e){
+            
+        }
+    }
 
     public boolean crearProveedor(String nit, String nombre, String direccion, String area, String telefono) {
         try {

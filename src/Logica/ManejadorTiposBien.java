@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,14 +20,14 @@ import javax.swing.JOptionPane;
  * @author jpmazate
  */
 public class ManejadorTiposBien {
-    
+
     private Connection conexion;
 
     public ManejadorTiposBien() {
         conexion = ConexionBD.getInstance();
     }
-    
-     public void llenarTiposBien(TablaModelo modelo) {
+
+    public void llenarTiposBien(TablaModelo modelo) {
         PreparedStatement declaracion;
         try {
             declaracion = conexion.prepareStatement("CALL fillTiposBien()");
@@ -39,12 +40,12 @@ public class ManejadorTiposBien {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Problema al cargar los tipos de bienes");
-        } catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
     }
-     
-      public boolean crearTipoBien(String codigo, String nombre) {
+
+    public boolean crearTipoBien(String codigo, String nombre) {
         try {
             PreparedStatement declaracion;
             declaracion = conexion.prepareStatement("INSERT INTO TIPOBIEN(CODIGO,NOMBRE) VALUES (?,?);");
@@ -56,8 +57,8 @@ public class ManejadorTiposBien {
             return false;
         }
     }
-      
-      public boolean editarTipoBien(String codigo, String nombre) {
+
+    public boolean editarTipoBien(String codigo, String nombre) {
         try {
             PreparedStatement declaracion;
             declaracion = conexion.prepareStatement("UPDATE TIPOBIEN SET NOMBRE=? WHERE CODIGO=?");
@@ -69,8 +70,8 @@ public class ManejadorTiposBien {
             return false;
         }
     }
-      
-      public boolean eliminarTipoBien(String codigo){
+
+    public boolean eliminarTipoBien(String codigo) {
         try {
             PreparedStatement declaracion;
             declaracion = conexion.prepareStatement("DELETE FROM TIPOBIEN WHERE CODIGO=?");
@@ -82,4 +83,19 @@ public class ManejadorTiposBien {
         }
     }
     
+    public void llenarCodigos(JComboBox box){
+        PreparedStatement declaracion;
+        try {
+            declaracion = conexion.prepareStatement("SELECT Codigo FROM TIPOBIEN ORDER BY CODIGO");
+            ResultSet resultado = declaracion.executeQuery();
+            while (resultado.next()) {
+                box.insertItemAt(resultado.getString(1), box.getItemCount());
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Problema al cargar los tipos de bienes");
+        } catch (Exception e) {
+
+        }
+    }
+
 }

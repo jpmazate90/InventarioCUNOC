@@ -1,9 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI.Login.Inventario;
+
+import GUI.Login.Login;
+import GUI.Login.VistasAuxiliares.AuxiliarEncargado;
+import GUI.Login.VistasAuxiliares.AuxiliarProveedor;
+import Logica.ManejadorTiposBien;
+import Objetos.PasarString;
 
 /**
  *
@@ -12,9 +13,21 @@ package GUI.Login.Inventario;
 public class MenuInventario extends javax.swing.JFrame {
 
     private String usuarioActual;
+    private String codigoBuscar;
+    private ManejadorTiposBien manejadorTiposBien;
+
     public MenuInventario(String usuarioActual) {
         initComponents();
         this.usuarioActual = usuarioActual;
+        manejadorTiposBien = new ManejadorTiposBien();
+        llenarFiltros();
+
+    }
+
+    public void llenarFiltros() {
+        this.boxTiposBienes.insertItemAt("TODOS", 0);
+        manejadorTiposBien.llenarCodigos(this.boxTiposBienes);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -43,11 +56,11 @@ public class MenuInventario extends javax.swing.JFrame {
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField5 = new javax.swing.JTextField();
+        filtroEncargadoActual = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        filtroProveedor = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -55,7 +68,9 @@ public class MenuInventario extends javax.swing.JFrame {
         tablaBienes = new javax.swing.JTable();
         jComboBox3 = new javax.swing.JComboBox<>();
         jTextField8 = new javax.swing.JTextField();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        boxTiposBienes = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -63,6 +78,8 @@ public class MenuInventario extends javax.swing.JFrame {
         cutMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -116,7 +133,7 @@ public class MenuInventario extends javax.swing.JFrame {
 
         jLabel15.setText("Encargado Actual:");
         desktopPane.add(jLabel15);
-        jLabel15.setBounds(10, 500, 180, 18);
+        jLabel15.setBounds(10, 500, 130, 18);
 
         jLabel16.setText("Division:");
         desktopPane.add(jLabel16);
@@ -140,11 +157,11 @@ public class MenuInventario extends javax.swing.JFrame {
         desktopPane.add(jComboBox1);
         jComboBox1.setBounds(150, 410, 200, 35);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NINGUNO", "DE BAJA", "ACTIVO", " " }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "DE BAJA", "ACTIVO", " " }));
         desktopPane.add(jComboBox2);
         jComboBox2.setBounds(150, 450, 200, 35);
-        desktopPane.add(jTextField5);
-        jTextField5.setBounds(150, 490, 200, 35);
+        desktopPane.add(filtroEncargadoActual);
+        filtroEncargadoActual.setBounds(150, 490, 150, 35);
 
         jLabel12.setText("Fecha Inicial:");
         desktopPane.add(jLabel12);
@@ -153,8 +170,8 @@ public class MenuInventario extends javax.swing.JFrame {
         jDateChooser2.setBounds(150, 310, 210, 36);
         desktopPane.add(jTextField6);
         jTextField6.setBounds(150, 530, 200, 35);
-        desktopPane.add(jTextField7);
-        jTextField7.setBounds(150, 580, 200, 35);
+        desktopPane.add(filtroProveedor);
+        filtroProveedor.setBounds(150, 580, 150, 35);
 
         jButton1.setText("BUSCAR");
         desktopPane.add(jButton1);
@@ -183,18 +200,36 @@ public class MenuInventario extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaBienes);
 
         desktopPane.add(jScrollPane1);
-        jScrollPane1.setBounds(360, 130, 1460, 520);
+        jScrollPane1.setBounds(360, 130, 1450, 520);
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         desktopPane.add(jComboBox3);
-        jComboBox3.setBounds(490, 90, 170, 35);
+        jComboBox3.setBounds(510, 90, 180, 35);
 
         jTextField8.setText("jTextField8");
         desktopPane.add(jTextField8);
-        jTextField8.setBounds(670, 90, 1150, 35);
+        jTextField8.setBounds(700, 90, 1110, 35);
 
-        desktopPane.add(jComboBox4);
-        jComboBox4.setBounds(150, 230, 200, 35);
+        desktopPane.add(boxTiposBienes);
+        boxTiposBienes.setBounds(150, 230, 200, 35);
+
+        jButton2.setText("?");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        desktopPane.add(jButton2);
+        jButton2.setBounds(300, 490, 50, 30);
+
+        jButton3.setText("?");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        desktopPane.add(jButton3);
+        jButton3.setBounds(300, 580, 50, 30);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Crear Bien");
@@ -202,6 +237,11 @@ public class MenuInventario extends javax.swing.JFrame {
         openMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         openMenuItem.setMnemonic('o');
         openMenuItem.setText("Ir a crear un bien");
+        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(openMenuItem);
 
         menuBar.add(fileMenu);
@@ -226,6 +266,19 @@ public class MenuInventario extends javax.swing.JFrame {
 
         menuBar.add(helpMenu);
 
+        jMenu1.setText("Cerrar Sesion");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Cerrar Sesion");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        menuBar.add(jMenu1);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -247,18 +300,47 @@ public class MenuInventario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        PasarString resultado = new PasarString("");
+        AuxiliarEncargado aux = new AuxiliarEncargado(this, true, resultado);
+        aux.setVisible(true);
+        this.filtroEncargadoActual.setText(resultado.getValor());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        PasarString resultado = new PasarString("");
+        AuxiliarProveedor aux = new AuxiliarProveedor(this, true, resultado);
+        aux.setVisible(true);
+        this.filtroProveedor.setText(resultado.getValor());
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Login ventana = new Login();
+        ventana.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
+        CrearBien ventana = new CrearBien(this.usuarioActual);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_openMenuItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxTiposBienes;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JTextField filtroEncargadoActual;
+    private javax.swing.JTextField filtroProveedor;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
@@ -278,13 +360,13 @@ public class MenuInventario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JMenuBar menuBar;
