@@ -72,7 +72,7 @@ public class TipoBien extends javax.swing.JFrame {
         String nombre = this.crearNombre.getText();
 
         if (!codigo.equals("")) {
-            if (codigo.length() <= 30) {
+            if (codigo.length() <= 3) {
                 if (!nombre.equals("")) {
                     if (nombre.length() <= 200) {
                         boolean resultado = manejadorTipos.crearTipoBien(codigo, nombre);
@@ -93,7 +93,7 @@ public class TipoBien extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "NO PUEDE ESTAR EN BLANCO EL NOMBRE");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "SE ACEPTA MAXIMO 30 CARACTERES, CARACTERES ACTUALES: " + codigo.length());
+                JOptionPane.showMessageDialog(null, "SE ACEPTA MAXIMO 3 CARACTERES EN EL CODIGO, CARACTERES ACTUALES: " + codigo.length());
             }
         } else {
             JOptionPane.showMessageDialog(null, "NO PUEDE ESTAR EN BLANCO EL CODIGO");

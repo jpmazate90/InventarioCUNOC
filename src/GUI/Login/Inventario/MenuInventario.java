@@ -3,8 +3,20 @@ package GUI.Login.Inventario;
 import GUI.Login.Login;
 import GUI.Login.VistasAuxiliares.AuxiliarEncargado;
 import GUI.Login.VistasAuxiliares.AuxiliarProveedor;
+import Logica.ManejadorCreacionBien;
+import Logica.ManejadorPersonal;
+import Logica.ManejadorProveedores;
 import Logica.ManejadorTiposBien;
 import Objetos.PasarString;
+import Tablas.GeneradorModelos;
+import Tablas.TablaModelo;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.RowFilter;
+import javax.swing.WindowConstants;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -16,17 +28,45 @@ public class MenuInventario extends javax.swing.JFrame {
     private String codigoBuscar;
     private ManejadorTiposBien manejadorTiposBien;
 
+    private TableRowSorter tablaSorteada;
+    private TablaModelo modelo;
+    private ManejadorCreacionBien manejadorCreacionBienes;
+    private SimpleDateFormat fechaCompleta;
+
     public MenuInventario(String usuarioActual) {
         initComponents();
         this.usuarioActual = usuarioActual;
         manejadorTiposBien = new ManejadorTiposBien();
+        manejadorCreacionBienes = new ManejadorCreacionBien();
+        fechaCompleta = new SimpleDateFormat("yyyy-MM-dd");
         llenarFiltros();
+        iniciarDatosBienes();
 
     }
 
+    public void iniciarDatosBienes() {
+        try {
+            modelo = new TablaModelo();
+            GeneradorModelos.modeloBienes(modelo);
+            GeneradorModelos.asignarModeloTabla(modelo, tablaBienes);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void recargarTabla() {
+        modelo = new TablaModelo();
+        this.textoFiltros.setText("");
+        this.tablaBienes.setRowSorter(null);
+        manejadorCreacionBienes = new ManejadorCreacionBien();
+        manejadorTiposBien = new ManejadorTiposBien();
+        iniciarDatosBienes();
+    }
+
     public void llenarFiltros() {
-        this.boxTiposBienes.insertItemAt("TODOS", 0);
-        manejadorTiposBien.llenarCodigos(this.boxTiposBienes);
+        manejadorTiposBien.llenarCodigos(this.filtroTipoBien);
 
     }
 
@@ -49,28 +89,36 @@ public class MenuInventario extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
-        jTextField4 = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        filtroNoTarjeta = new javax.swing.JTextField();
+        filtroUnidad = new javax.swing.JTextField();
+        filtroAnio = new com.toedter.calendar.JYearChooser();
+        filtroNoFactura = new javax.swing.JTextField();
+        FiltroFechaFinal = new com.toedter.calendar.JDateChooser();
+        filtroTipoIngreso = new javax.swing.JComboBox<>();
+        filtroEstadoActual = new javax.swing.JComboBox<>();
         filtroEncargadoActual = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jTextField6 = new javax.swing.JTextField();
+        filtroFechaInicial = new com.toedter.calendar.JDateChooser();
+        filtroDivision = new javax.swing.JTextField();
         filtroProveedor = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaBienes = new javax.swing.JTable();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jTextField8 = new javax.swing.JTextField();
-        boxTiposBienes = new javax.swing.JComboBox<>();
+        filtros = new javax.swing.JComboBox<>();
+        textoFiltros = new javax.swing.JTextField();
+        filtroTipoBien = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        filtroCheckBoxAnio = new javax.swing.JCheckBox();
+        filtroValorFinal = new javax.swing.JFormattedTextField();
+        filtroValorInicial = new javax.swing.JFormattedTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        filtroCheckBoxFechaInicial = new javax.swing.JCheckBox();
+        filtroCheckBoxFechaFinal = new javax.swing.JCheckBox();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -142,40 +190,45 @@ public class MenuInventario extends javax.swing.JFrame {
         jLabel17.setText("Proveedor:");
         desktopPane.add(jLabel17);
         jLabel17.setBounds(10, 590, 140, 18);
-        desktopPane.add(jTextField1);
-        jTextField1.setBounds(150, 130, 200, 35);
-        desktopPane.add(jTextField2);
-        jTextField2.setBounds(150, 170, 200, 35);
-        desktopPane.add(jYearChooser1);
-        jYearChooser1.setBounds(150, 210, 200, 18);
-        desktopPane.add(jTextField4);
-        jTextField4.setBounds(150, 270, 200, 35);
-        desktopPane.add(jDateChooser1);
-        jDateChooser1.setBounds(150, 360, 210, 36);
+        desktopPane.add(filtroNoTarjeta);
+        filtroNoTarjeta.setBounds(150, 130, 200, 35);
+        desktopPane.add(filtroUnidad);
+        filtroUnidad.setBounds(150, 170, 200, 35);
+        desktopPane.add(filtroAnio);
+        filtroAnio.setBounds(150, 210, 170, 18);
+        desktopPane.add(filtroNoFactura);
+        filtroNoFactura.setBounds(150, 270, 200, 35);
+        desktopPane.add(FiltroFechaFinal);
+        FiltroFechaFinal.setBounds(150, 360, 170, 36);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "COMPRA", "TRASLADO", "DONACION" }));
-        desktopPane.add(jComboBox1);
-        jComboBox1.setBounds(150, 410, 200, 35);
+        filtroTipoIngreso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "COMPRA", "TRASLADO", "DONACION" }));
+        desktopPane.add(filtroTipoIngreso);
+        filtroTipoIngreso.setBounds(150, 410, 200, 35);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "DE BAJA", "ACTIVO", " " }));
-        desktopPane.add(jComboBox2);
-        jComboBox2.setBounds(150, 450, 200, 35);
+        filtroEstadoActual.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "DE BAJA", "ACTIVO" }));
+        desktopPane.add(filtroEstadoActual);
+        filtroEstadoActual.setBounds(150, 450, 200, 35);
         desktopPane.add(filtroEncargadoActual);
         filtroEncargadoActual.setBounds(150, 490, 150, 35);
 
         jLabel12.setText("Fecha Inicial:");
         desktopPane.add(jLabel12);
         jLabel12.setBounds(10, 320, 150, 18);
-        desktopPane.add(jDateChooser2);
-        jDateChooser2.setBounds(150, 310, 210, 36);
-        desktopPane.add(jTextField6);
-        jTextField6.setBounds(150, 530, 200, 35);
+        desktopPane.add(filtroFechaInicial);
+        filtroFechaInicial.setBounds(150, 310, 170, 36);
+        desktopPane.add(filtroDivision);
+        filtroDivision.setBounds(150, 530, 200, 35);
         desktopPane.add(filtroProveedor);
         filtroProveedor.setBounds(150, 580, 150, 35);
 
         jButton1.setText("BUSCAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         desktopPane.add(jButton1);
-        jButton1.setBounds(150, 630, 200, 28);
+        jButton1.setBounds(180, 710, 170, 28);
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 2, 24)); // NOI18N
         jLabel4.setText("FILTROS DE BUSQUEDA");
@@ -202,16 +255,26 @@ public class MenuInventario extends javax.swing.JFrame {
         desktopPane.add(jScrollPane1);
         jScrollPane1.setBounds(360, 130, 1450, 520);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        desktopPane.add(jComboBox3);
-        jComboBox3.setBounds(510, 90, 180, 35);
+        filtros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO TARJETA", "UNIDAD ACADEMICA", "AÑO INGRESO", "TIPO BIEN", "NO FACTURA", "FECHA INGRESO", "TIPO INGRESO", "ESTADO ACTUAL", "ENCARGADO ACTUAL", "DIVISION", "PROVEEDOR", "VALOR BIEN" }));
+        filtros.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                filtrosItemStateChanged(evt);
+            }
+        });
+        desktopPane.add(filtros);
+        filtros.setBounds(510, 90, 180, 35);
 
-        jTextField8.setText("jTextField8");
-        desktopPane.add(jTextField8);
-        jTextField8.setBounds(700, 90, 1110, 35);
+        textoFiltros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textoFiltrosKeyTyped(evt);
+            }
+        });
+        desktopPane.add(textoFiltros);
+        textoFiltros.setBounds(700, 90, 1110, 35);
 
-        desktopPane.add(boxTiposBienes);
-        boxTiposBienes.setBounds(150, 230, 200, 35);
+        filtroTipoBien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS" }));
+        desktopPane.add(filtroTipoBien);
+        filtroTipoBien.setBounds(150, 230, 200, 35);
 
         jButton2.setText("?");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -230,6 +293,37 @@ public class MenuInventario extends javax.swing.JFrame {
         });
         desktopPane.add(jButton3);
         jButton3.setBounds(300, 580, 50, 30);
+        desktopPane.add(filtroCheckBoxAnio);
+        filtroCheckBoxAnio.setBounds(330, 210, 20, 23);
+
+        filtroValorFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.00"))));
+        desktopPane.add(filtroValorFinal);
+        filtroValorFinal.setBounds(150, 670, 200, 35);
+
+        filtroValorInicial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.00"))));
+        desktopPane.add(filtroValorInicial);
+        filtroValorInicial.setBounds(150, 630, 200, 35);
+
+        jLabel18.setText("Valor Inicial:");
+        desktopPane.add(jLabel18);
+        jLabel18.setBounds(10, 640, 100, 18);
+
+        jLabel19.setText("Valor Final:");
+        desktopPane.add(jLabel19);
+        jLabel19.setBounds(10, 680, 90, 18);
+
+        jButton4.setText("LIMPIAR FILTROS");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        desktopPane.add(jButton4);
+        jButton4.setBounds(10, 710, 160, 28);
+        desktopPane.add(filtroCheckBoxFechaInicial);
+        filtroCheckBoxFechaInicial.setBounds(330, 320, 20, 23);
+        desktopPane.add(filtroCheckBoxFechaFinal);
+        filtroCheckBoxFechaFinal.setBounds(330, 370, 20, 23);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Crear Bien");
@@ -325,24 +419,123 @@ public class MenuInventario extends javax.swing.JFrame {
         ventana.setVisible(true);
     }//GEN-LAST:event_openMenuItemActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        recargarTabla();
+        hacerFiltros();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        borrarDatosFiltros();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void textoFiltrosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoFiltrosKeyTyped
+        int valor = filtros.getSelectedIndex();
+// sortea la tabla
+        textoFiltros.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                tablaSorteada.setRowFilter(RowFilter.regexFilter("(?i)" + textoFiltros.getText(), valor));
+            }
+        });
+
+        tablaSorteada = new TableRowSorter(modelo);
+        tablaBienes.setRowSorter(tablaSorteada);
+    }//GEN-LAST:event_textoFiltrosKeyTyped
+
+    private void filtrosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filtrosItemStateChanged
+        int valor = this.filtros.getSelectedIndex();
+// sortea la tabla
+        tablaSorteada = new TableRowSorter(modelo);
+        tablaSorteada.setRowFilter(RowFilter.regexFilter("(?i)" + textoFiltros.getText(), valor));
+        tablaBienes.setRowSorter(tablaSorteada);
+    }//GEN-LAST:event_filtrosItemStateChanged
+
+    public void borrarDatosFiltros() {
+        this.filtroAnio.setYear(2020);
+        this.FiltroFechaFinal.setDate(new Date());
+        this.filtroFechaInicial.setDate(new Date());
+        this.filtroCheckBoxAnio.setSelected(false);
+        this.filtroCheckBoxFechaFinal.setSelected(false);
+        this.filtroCheckBoxFechaInicial.setSelected(false);
+        this.filtroDivision.setText("");
+        this.filtroEncargadoActual.setText("");
+        this.filtroEstadoActual.setSelectedIndex(0);
+        this.filtroNoFactura.setText("");
+        this.filtroNoTarjeta.setText("");
+        this.filtroValorFinal.setText("");
+        this.filtroValorInicial.setText("");
+        this.filtroProveedor.setText("");
+        this.filtroTipoBien.setSelectedIndex(0);
+        this.filtroTipoIngreso.setSelectedIndex(0);
+        this.filtroUnidad.setText("");
+    }
+
+    public void hacerFiltros() {
+
+        String notarjeta = this.filtroNoTarjeta.getText();
+        String unidad = this.filtroUnidad.getText();
+        String anio = "";
+        if (this.filtroCheckBoxAnio.isSelected()) {
+            anio = Integer.toString(this.filtroAnio.getYear());
+        }
+        String tipoBien = this.filtroTipoBien.getSelectedItem().toString();
+        String noFactura = this.filtroNoFactura.getText();
+        String fechaInicial = "";
+        if (this.filtroCheckBoxFechaInicial.isSelected()) {
+            fechaInicial = fechaCompleta.format(this.filtroFechaInicial.getDate());
+        }
+        String fechaFinal = "";
+        if (this.filtroCheckBoxFechaFinal.isSelected()) {
+            fechaFinal = fechaCompleta.format(this.FiltroFechaFinal.getDate());
+        }
+
+        String tipoIngreso = this.filtroTipoIngreso.getSelectedItem().toString();
+        String estadoActual = this.filtroEstadoActual.getSelectedItem().toString();
+        String encargadoActual = this.filtroEncargadoActual.getText();
+        String division = this.filtroDivision.getText();
+        String proveedor = this.filtroProveedor.getText();
+
+        String valorInicial = this.filtroValorInicial.getText();
+        String valorfinal = this.filtroValorFinal.getText();
+
+        System.out.println("valor inicial: " + valorInicial);
+
+        iniciarDatosBienes();
+        manejadorCreacionBienes.buscarBien(notarjeta, unidad, anio, tipoBien, noFactura,
+                fechaInicial, fechaFinal, tipoIngreso, estadoActual, encargadoActual,
+                division, proveedor, valorInicial, valorfinal, modelo);
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> boxTiposBienes;
+    private com.toedter.calendar.JDateChooser FiltroFechaFinal;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
+    private com.toedter.calendar.JYearChooser filtroAnio;
+    private javax.swing.JCheckBox filtroCheckBoxAnio;
+    private javax.swing.JCheckBox filtroCheckBoxFechaFinal;
+    private javax.swing.JCheckBox filtroCheckBoxFechaInicial;
+    private javax.swing.JTextField filtroDivision;
     private javax.swing.JTextField filtroEncargadoActual;
+    private javax.swing.JComboBox<String> filtroEstadoActual;
+    private com.toedter.calendar.JDateChooser filtroFechaInicial;
+    private javax.swing.JTextField filtroNoFactura;
+    private javax.swing.JTextField filtroNoTarjeta;
     private javax.swing.JTextField filtroProveedor;
+    private javax.swing.JComboBox<String> filtroTipoBien;
+    private javax.swing.JComboBox<String> filtroTipoIngreso;
+    private javax.swing.JTextField filtroUnidad;
+    private javax.swing.JFormattedTextField filtroValorFinal;
+    private javax.swing.JFormattedTextField filtroValorInicial;
+    private javax.swing.JComboBox<String> filtros;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -352,6 +545,8 @@ public class MenuInventario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -363,15 +558,10 @@ public class MenuInventario extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField8;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JTable tablaBienes;
+    private javax.swing.JTextField textoFiltros;
     // End of variables declaration//GEN-END:variables
 
 }

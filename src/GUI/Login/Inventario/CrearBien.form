@@ -122,10 +122,8 @@
                                           <Component id="textoEncargado" alignment="0" max="32767" attributes="0"/>
                                           <Component id="textoDivision" alignment="0" min="-2" pref="289" max="-2" attributes="0"/>
                                           <Component id="textoValor" alignment="0" max="32767" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="boxEntidadCompra" alignment="0" pref="287" max="32767" attributes="0"/>
-                                              <Component id="textoProveedor" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
+                                          <Component id="boxEntidadCompra" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="textoProveedor" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -214,10 +212,12 @@
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="labelNoSolicitudCompra" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="textoNoSolicitudCompra" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="labelNoSolicitudCompra" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">

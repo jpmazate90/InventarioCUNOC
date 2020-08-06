@@ -6,11 +6,13 @@
 package Logica;
 
 import Conexion.ConexionBD;
+import Tablas.TablaModelo;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -109,9 +111,9 @@ public class ManejadorCreacionBien {
                 declaracion.setString(15, tipoIngreso);
                 declaracion.setInt(16, 1);
                 if (tipoIngreso.equals("DONACION")) {
-                    declaracion.setString(17, "1000000");
+                    declaracion.setString(17, "10000000");
                 } else {
-                    declaracion.setString(17, "0000000");
+                    declaracion.setString(17, "00000000");
                 }
                 declaracion.setString(18, procedencia);
                 declaracion.setString(19, noTranscripcion);
@@ -123,9 +125,209 @@ public class ManejadorCreacionBien {
 
             }
         } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "PROBLEMAS AL INSERTAR DATOS, VERIFIQUE SI EL VALOR DEL BIEN ESTA CORRECTAMENTE ESCRITO, Y LOS DEMAS CAMPOS TAMBIEN LO ESTAN");
             e.printStackTrace();
+            return false;
+        }catch(Exception e){
             return false;
         }
 
+    }
+
+    public boolean buscarBien(
+            String noTarjeta, String unidadAcademica, String anio, String tipoBien, String noFactura,
+            String fechaInicial, String fechaFinal, String tipoIngreso,
+            String estadoActual, String encargadoActual, String division,
+            String proveedor, String valorInicial, String valorFinal, TablaModelo modelo) {
+        PreparedStatement declaracion;
+        try {
+            boolean tieneFiltro = false;
+
+            ArrayList<String> listaFiltros = new ArrayList<>();
+            String filtros = "";
+            if (!noTarjeta.equals("")) {
+                listaFiltros.add(noTarjeta);
+                filtros = filtros + " WHERE NOTARJETA=? ";
+                tieneFiltro = true;
+            }
+            if (!unidadAcademica.equals("")) {
+                listaFiltros.add(unidadAcademica);
+                if (tieneFiltro) {
+                    filtros = filtros + " AND UNIDADACADEMICA=? ";
+                } else {
+                    filtros = filtros + " WHERE UNIDADACADEMICA=? ";
+                    tieneFiltro = true;
+                }
+            }
+            if (!anio.equals("")) {
+                listaFiltros.add(anio);
+                if (tieneFiltro) {
+                    filtros = filtros + " AND ANIOINGRESO=? ";
+                } else {
+                    filtros = filtros + " WHERE ANIOINGRESO=? ";
+                    tieneFiltro = true;
+                }
+            }
+            if (!tipoBien.equals("TODOS")) {
+                listaFiltros.add(tipoBien);
+                if (tieneFiltro) {
+                    filtros = filtros + " AND TIPOBIEN=? ";
+                } else {
+                    filtros = filtros + " WHERE TIPOBIEN=? ";
+                    tieneFiltro = true;
+                }
+            }
+            if (!noFactura.equals("")) {
+                listaFiltros.add(noFactura);
+                if (tieneFiltro) {
+                    filtros = filtros + " AND NOFACTURA=? ";
+                } else {
+                    filtros = filtros + " WHERE NOFACTURA=? ";
+                    tieneFiltro = true;
+                }
+            }
+            if (!fechaInicial.equals("") && fechaFinal.equals("")) {
+                listaFiltros.add(fechaInicial);
+                if (tieneFiltro) {
+                    filtros = filtros + " AND FECHAINGRESO>=? ";
+                } else {
+                    filtros = filtros + " WHERE FECHAINGRESO>=? ";
+                    tieneFiltro = true;
+                }
+            } else if (fechaInicial.equals("") && !fechaFinal.equals("")) {
+                listaFiltros.add(fechaFinal);
+                if (tieneFiltro) {
+                    filtros = filtros + " AND FECHAINGRESO<=? ";
+                } else {
+                    filtros = filtros + " WHERE FECHAINGRESO<=? ";
+                    tieneFiltro = true;
+                }
+            } else if (!fechaInicial.equals("") && !fechaFinal.equals("")) {
+                listaFiltros.add(fechaInicial);
+                listaFiltros.add(fechaFinal);
+                if (tieneFiltro) {
+                    filtros = filtros + " AND FECHAINGRESO BETWEEN ? AND ? ";
+                } else {
+                    filtros = filtros + " WHERE FECHAINGRESO BETWEEN ? AND ? ";
+                    tieneFiltro = true;
+                }
+            }
+
+            if (!tipoIngreso.equals("TODOS")) {
+                listaFiltros.add(tipoIngreso);
+                if (tieneFiltro) {
+                    filtros = filtros + " AND TIPOINGRESO=? ";
+                } else {
+                    filtros = filtros + " WHERE TIPOINGRESO=? ";
+                    tieneFiltro = true;
+                }
+            }
+            if (!estadoActual.equals("TODOS")) {
+                String dato = "";
+                if(estadoActual.equals("DE BAJA")){
+                    dato ="0";
+                }else{
+                    dato = "1";
+                }
+                listaFiltros.add(dato);
+                if (tieneFiltro) {
+                    filtros = filtros + " AND ESTADOACTUAL=? ";
+                } else {
+                    filtros = filtros + " WHERE ESTADOACTUAL=? ";
+                    tieneFiltro = true;
+                }
+            }
+            if (!encargadoActual.equals("")) {
+                listaFiltros.add(encargadoActual);
+                if (tieneFiltro) {
+                    filtros = filtros + " AND ENCARGADOACTUAL=? ";
+                } else {
+                    filtros = filtros + " WHERE ENCARGADOACTUAL=? ";
+                    tieneFiltro = true;
+                }
+            }
+            if (!division.equals("")) {
+                listaFiltros.add(division);
+                if (tieneFiltro) {
+                    filtros = filtros + " AND DIVISION=? ";
+                } else {
+                    filtros = filtros + " WHERE DIVISION=? ";
+                    tieneFiltro = true;
+                }
+            }
+            if (!proveedor.equals("")) {
+                listaFiltros.add(proveedor);
+                if (tieneFiltro) {
+                    filtros = filtros + " AND PROVEEDOR=? ";
+                } else {
+                    filtros = filtros + " WHERE PROVEEDOR=? ";
+                    tieneFiltro = true;
+                }
+            }
+            
+            if (!valorInicial.equals("") && valorFinal.equals("")) {
+                listaFiltros.add(valorInicial);
+                if (tieneFiltro) {
+                    filtros = filtros + " AND VALORBIEN>=? ";
+                } else {
+                    filtros = filtros + " WHERE VALORBIEN>=? ";
+                    tieneFiltro = true;
+                }
+            } else if (valorInicial.equals("") && !valorFinal.equals("")) {
+                listaFiltros.add(valorFinal);
+                if (tieneFiltro) {
+                    filtros = filtros + " AND VALORBIEN<=?";
+                } else {
+                    filtros = filtros + " WHERE VALORBIEN<=? ";
+                    tieneFiltro = true;
+                }
+            } else if (!valorInicial.equals("") && !valorFinal.equals("")) {
+                listaFiltros.add(valorInicial);
+                listaFiltros.add(valorFinal);
+                if (tieneFiltro) {
+                    filtros = filtros + " AND VALORBIEN BETWEEN ? AND ? ";
+                } else {
+                    filtros = filtros + " WHERE VALORBIEN BETWEEN ? AND ? ";
+                    tieneFiltro = true;
+                }
+            }
+
+            System.out.println("Esto tiene filtros: " + filtros);
+
+         
+            declaracion = conexion.prepareStatement("SELECT NOINVENTARIO,UNIDADACADEMICA,ANIOINGRESO,TIPOBIEN,NOFACTURA,FECHAINGRESO,TIPOINGRESO,ESTADOACTUAL,ENCARGADOACTUAL,DIVISION,PROVEEDOR,VALORBIEN FROM BIEN " + filtros);
+
+            for (int i = 0; i < listaFiltros.size(); i++) {
+                declaracion.setString(i + 1, listaFiltros.get(i));
+            }
+            ResultSet resultado = declaracion.executeQuery();
+            while (resultado.next()) {
+                Object objeto[] = new Object[12];
+                objeto[0] = resultado.getString(1);
+                objeto[1] = resultado.getString(2);
+                objeto[2] = resultado.getString(3);
+                objeto[3] = resultado.getString(4);
+                objeto[4] = resultado.getString(5);
+                objeto[5] = resultado.getString(6);
+                objeto[6] = resultado.getString(7);
+                objeto[7] = resultado.getString(8);
+                objeto[8] = resultado.getString(9);
+                objeto[9] = resultado.getString(10);
+                objeto[10] = resultado.getString(11);
+                objeto[11] = resultado.getString(12);
+                
+                
+                
+                modelo.addRow(objeto);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Problema al cargar los tipos de bienes");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

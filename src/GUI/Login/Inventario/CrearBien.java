@@ -259,18 +259,18 @@ public class CrearBien extends javax.swing.JFrame {
                     noSolicitudCompra, noOrdenCompra, noCUR, valorBien, division, encargado, encargado, tipoIngreso, entidadCompra, proveedor, "---", "---", "---", "---");
             if (resultado) {
                 JOptionPane.showMessageDialog(null, "SE INSERTO CORRECTAMENTE EL BIEN CON CODIGO " + noInventario);
-
+                this.setVisible(false);
             } else {
-
+                JOptionPane.showMessageDialog(null, "EXISTIERON ERRORES AL INTENTAR CREAR EL BIEN DENTRO DE LA BASE DE DATOS " + noInventario);
             }
         } else {
             boolean resultado = manejadorCreacionBien.crearBien(noInventario, this.usuario, noInventario, unidad, tipoBien, valor, fechaActual, tipoBien, descripcion, "---", "---",
                     "---", "---", noCUR, valorBien, division, encargado, encargado, tipoIngreso, "---", "---", "---", "---", "---", "---");
             if (resultado) {
                 JOptionPane.showMessageDialog(null, "SE INSERTO CORRECTAMENTE EL BIEN CON CODIGO " + noInventario);
-
+                this.setVisible(false);
             } else {
-
+                JOptionPane.showMessageDialog(null, "EXISTIERON ERRORES AL INTENTAR CREAR EL BIEN DENTRO DE LA BASE DE DATOS " + noInventario);
             }
         }
     }
@@ -506,9 +506,8 @@ public class CrearBien extends javax.swing.JFrame {
                                         .addComponent(textoEncargado, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(textoDivision, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(textoValor, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(boxEntidadCompra, javax.swing.GroupLayout.Alignment.LEADING, 0, 287, Short.MAX_VALUE)
-                                            .addComponent(textoProveedor, javax.swing.GroupLayout.Alignment.LEADING)))
+                                        .addComponent(boxEntidadCompra, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(textoProveedor, javax.swing.GroupLayout.Alignment.LEADING))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
@@ -571,10 +570,11 @@ public class CrearBien extends javax.swing.JFrame {
                                 .addGap(29, 29, 29)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(labelNoSolicitudCompra)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(textoNoSolicitudCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(labelNoSolicitudCompra)
+                                        .addComponent(jLabel5)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(labelNoOrdenCompra)

@@ -34,6 +34,8 @@ public class GeneradorModelos {
         modelo.addColumn("FECHA CREACION");
         modelo.addColumn("FECHA EDITADO");
     }
+    
+    
     public static void modeloAuxiliarProveedores(TablaModelo modelo) {
         modelo.addColumn("NIT");
         modelo.addColumn("NOMBRE EMPRESA");
@@ -68,7 +70,20 @@ public class GeneradorModelos {
         
     }
     
-    
+        public static void modeloBienes(TablaModelo modelo) {
+        modelo.addColumn("NOINVENTARIO");
+        modelo.addColumn("UNIDAD");
+        modelo.addColumn("ANIO");
+        modelo.addColumn("TIPO BIEN");
+        modelo.addColumn("FACTURA");
+        modelo.addColumn("FECHA INGRESO");
+        modelo.addColumn("TIPO INGRESO");
+        modelo.addColumn("ESTADO");
+        modelo.addColumn("ENCARGADO");
+        modelo.addColumn("DIVISION");
+        modelo.addColumn("PROVEEDOR");
+        modelo.addColumn("VALOR");                                
+    }
     
     
     public static void asignarModeloTabla(TablaModelo modelo, JTable tabla) {
