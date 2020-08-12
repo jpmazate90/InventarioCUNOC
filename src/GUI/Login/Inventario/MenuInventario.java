@@ -10,10 +10,13 @@ import Logica.ManejadorTiposBien;
 import Objetos.PasarString;
 import Tablas.GeneradorModelos;
 import Tablas.TablaModelo;
+import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.WindowConstants;
 import javax.swing.table.TableRowSorter;
@@ -41,6 +44,7 @@ public class MenuInventario extends javax.swing.JFrame {
         fechaCompleta = new SimpleDateFormat("yyyy-MM-dd");
         llenarFiltros();
         iniciarDatosBienes();
+        FiltroFechaFinal.updateUI();
 
     }
 
@@ -55,7 +59,7 @@ public class MenuInventario extends javax.swing.JFrame {
         }
 
     }
-    
+
     public void recargarTabla() {
         modelo = new TablaModelo();
         this.textoFiltros.setText("");
@@ -119,6 +123,26 @@ public class MenuInventario extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         filtroCheckBoxFechaInicial = new javax.swing.JCheckBox();
         filtroCheckBoxFechaFinal = new javax.swing.JCheckBox();
+        jLabel20 = new javax.swing.JLabel();
+        textoNoTarjeta = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        textoEncargado = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        textoTipoIngreso = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        textoValor = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        textoProveedor = new javax.swing.JTextField();
+        textoDivision = new javax.swing.JTextField();
+        botonBaja = new javax.swing.JButton();
+        botonTraslado = new javax.swing.JButton();
+        botonEditar = new javax.swing.JButton();
+        botonEliminarDatos = new javax.swing.JButton();
+        jLabel26 = new javax.swing.JLabel();
+        textoFecha = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        textoEstado = new javax.swing.JTextField();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -250,6 +274,11 @@ public class MenuInventario extends javax.swing.JFrame {
 
             }
         ));
+        tablaBienes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaBienesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaBienes);
 
         desktopPane.add(jScrollPane1);
@@ -324,6 +353,160 @@ public class MenuInventario extends javax.swing.JFrame {
         filtroCheckBoxFechaInicial.setBounds(330, 320, 20, 23);
         desktopPane.add(filtroCheckBoxFechaFinal);
         filtroCheckBoxFechaFinal.setBounds(330, 370, 20, 23);
+
+        jLabel20.setText("No Tarjeta");
+        desktopPane.add(jLabel20);
+        jLabel20.setBounds(430, 680, 100, 18);
+
+        textoNoTarjeta.setEditable(false);
+        textoNoTarjeta.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        textoNoTarjeta.setOpaque(false);
+        desktopPane.add(textoNoTarjeta);
+        textoNoTarjeta.setBounds(530, 670, 200, 35);
+
+        jLabel21.setText("Encargado:");
+        desktopPane.add(jLabel21);
+        jLabel21.setBounds(430, 730, 90, 18);
+
+        textoEncargado.setEditable(false);
+        textoEncargado.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        textoEncargado.setOpaque(false);
+        desktopPane.add(textoEncargado);
+        textoEncargado.setBounds(530, 720, 200, 35);
+
+        jLabel22.setText("Tipo Ingreso:");
+        desktopPane.add(jLabel22);
+        jLabel22.setBounds(800, 680, 100, 18);
+
+        textoTipoIngreso.setEditable(false);
+        textoTipoIngreso.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        desktopPane.add(textoTipoIngreso);
+        textoTipoIngreso.setBounds(910, 670, 180, 35);
+
+        jLabel23.setText("Valor:");
+        desktopPane.add(jLabel23);
+        jLabel23.setBounds(800, 730, 70, 18);
+
+        textoValor.setEditable(false);
+        textoValor.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        desktopPane.add(textoValor);
+        textoValor.setBounds(910, 720, 180, 35);
+
+        jLabel24.setText("Fecha Ingreso:");
+        desktopPane.add(jLabel24);
+        jLabel24.setBounds(1140, 680, 110, 18);
+
+        jLabel25.setText("Proveedor:");
+        desktopPane.add(jLabel25);
+        jLabel25.setBounds(1140, 730, 100, 18);
+
+        textoProveedor.setEditable(false);
+        textoProveedor.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        desktopPane.add(textoProveedor);
+        textoProveedor.setBounds(1270, 720, 210, 35);
+
+        textoDivision.setEditable(false);
+        textoDivision.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        desktopPane.add(textoDivision);
+        textoDivision.setBounds(1600, 670, 210, 35);
+
+        botonBaja.setBackground(new java.awt.Color(92, 138, 184));
+        botonBaja.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        botonBaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha_opt.jpg"))); // NOI18N
+        botonBaja.setText("Baja de Bien");
+        botonBaja.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonBajaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonBajaMouseExited(evt);
+            }
+        });
+        botonBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBajaActionPerformed(evt);
+            }
+        });
+        desktopPane.add(botonBaja);
+        botonBaja.setBounds(430, 770, 300, 120);
+
+        botonTraslado.setBackground(new java.awt.Color(92, 138, 184));
+        botonTraslado.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        botonTraslado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carrito_opt.jpg"))); // NOI18N
+        botonTraslado.setText("Traslado de Bien");
+        botonTraslado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonTrasladoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonTrasladoMouseExited(evt);
+            }
+        });
+        botonTraslado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonTrasladoActionPerformed(evt);
+            }
+        });
+        desktopPane.add(botonTraslado);
+        botonTraslado.setBounds(800, 770, 300, 120);
+
+        botonEditar.setBackground(new java.awt.Color(92, 138, 184));
+        botonEditar.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        botonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar_opt.png"))); // NOI18N
+        botonEditar.setText("Editar Bien");
+        botonEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonEditarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonEditarMouseExited(evt);
+            }
+        });
+        botonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEditarActionPerformed(evt);
+            }
+        });
+        desktopPane.add(botonEditar);
+        botonEditar.setBounds(1140, 770, 340, 120);
+
+        botonEliminarDatos.setBackground(new java.awt.Color(135, 146, 158));
+        botonEliminarDatos.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        botonEliminarDatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/basurero_opt.jpg"))); // NOI18N
+        botonEliminarDatos.setMnemonic('E');
+        botonEliminarDatos.setText("Eliminar Campos");
+        botonEliminarDatos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonEliminarDatosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonEliminarDatosMouseExited(evt);
+            }
+        });
+        botonEliminarDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarDatosActionPerformed(evt);
+            }
+        });
+        desktopPane.add(botonEliminarDatos);
+        botonEliminarDatos.setBounds(1510, 770, 280, 120);
+
+        jLabel26.setText("Division:");
+        desktopPane.add(jLabel26);
+        jLabel26.setBounds(1510, 680, 70, 18);
+
+        textoFecha.setEditable(false);
+        textoFecha.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        desktopPane.add(textoFecha);
+        textoFecha.setBounds(1270, 670, 210, 35);
+
+        jLabel27.setText("Estado:");
+        desktopPane.add(jLabel27);
+        jLabel27.setBounds(1510, 730, 80, 18);
+
+        textoEstado.setEditable(false);
+        desktopPane.add(textoEstado);
+        textoEstado.setBounds(1600, 720, 210, 35);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Crear Bien");
@@ -426,6 +609,7 @@ public class MenuInventario extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         borrarDatosFiltros();
+        recargarTabla();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void textoFiltrosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoFiltrosKeyTyped
@@ -449,6 +633,122 @@ public class MenuInventario extends javax.swing.JFrame {
         tablaSorteada.setRowFilter(RowFilter.regexFilter("(?i)" + textoFiltros.getText(), valor));
         tablaBienes.setRowSorter(tablaSorteada);
     }//GEN-LAST:event_filtrosItemStateChanged
+
+    private void botonBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBajaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonBajaActionPerformed
+
+    private void botonBajaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBajaMouseExited
+
+        botonBaja.setBackground(new java.awt.Color(92, 138, 184));
+    }//GEN-LAST:event_botonBajaMouseExited
+
+    private void botonBajaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBajaMouseEntered
+
+        botonBaja.setBackground(Color.WHITE);
+    }//GEN-LAST:event_botonBajaMouseEntered
+
+    private void botonTrasladoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonTrasladoMouseEntered
+        botonTraslado.setBackground(Color.WHITE);
+    }//GEN-LAST:event_botonTrasladoMouseEntered
+
+    private void botonTrasladoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonTrasladoMouseExited
+        botonTraslado.setBackground(new java.awt.Color(92, 138, 184));
+    }//GEN-LAST:event_botonTrasladoMouseExited
+
+    private void botonEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEditarMouseEntered
+        botonEditar.setBackground(Color.WHITE);
+    }//GEN-LAST:event_botonEditarMouseEntered
+
+    private void botonEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEditarMouseExited
+        botonEditar.setBackground(new java.awt.Color(92, 138, 184));
+    }//GEN-LAST:event_botonEditarMouseExited
+
+    private void tablaBienesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaBienesMouseClicked
+
+        int seleccion = tablaBienes.getSelectedRow();// recoge la selecion
+
+        this.textoNoTarjeta.setText((String) tablaBienes.getValueAt(seleccion, 0));
+        this.textoEncargado.setText((String) tablaBienes.getValueAt(seleccion, 8));
+        this.textoTipoIngreso.setText((String) tablaBienes.getValueAt(seleccion, 6));
+        this.textoValor.setText((String) tablaBienes.getValueAt(seleccion, 11));
+        this.textoFecha.setText((String) tablaBienes.getValueAt(seleccion, 5));
+        this.textoProveedor.setText((String) tablaBienes.getValueAt(seleccion, 10));
+        this.textoDivision.setText((String) tablaBienes.getValueAt(seleccion, 9));
+        this.textoEstado.setText((String) tablaBienes.getValueAt(seleccion, 7));
+
+
+    }//GEN-LAST:event_tablaBienesMouseClicked
+
+    private void botonEliminarDatosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarDatosMouseEntered
+        botonEliminarDatos.setBackground(Color.WHITE);
+    }//GEN-LAST:event_botonEliminarDatosMouseEntered
+
+    private void botonEliminarDatosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarDatosMouseExited
+        botonEliminarDatos.setBackground(new java.awt.Color(135, 146, 158));
+
+    }//GEN-LAST:event_botonEliminarDatosMouseExited
+
+    private void botonTrasladoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonTrasladoActionPerformed
+        trasladoBien();
+    }//GEN-LAST:event_botonTrasladoActionPerformed
+
+    private void botonEliminarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarDatosActionPerformed
+        eliminarDatos();
+    }//GEN-LAST:event_botonEliminarDatosActionPerformed
+
+    private void botonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarActionPerformed
+        editarBien();
+
+    }//GEN-LAST:event_botonEditarActionPerformed
+
+    public void editarBien() {
+        String noTarjeta = this.textoNoTarjeta.getText();
+        String estado = this.textoEstado.getText();
+        if (estado.equals("1")) {
+            if (!noTarjeta.equals("")) {
+                EditarBien editar = new EditarBien(this, true, noTarjeta);
+                editar.setVisible(true);
+                recargarTabla();
+                eliminarDatos();
+            } else {
+                JOptionPane.showMessageDialog(null, "NO SE HA SELECCIONADO NINGUN BIEN PARA EDITARLO");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "EL BIEN CON NO DE TARJETA: " + noTarjeta + " ESTA DADO DE BAJA, NO SE PUEDE EDITAR SU INFORMACION");
+        }
+    }
+
+    public void trasladoBien() {
+        String noTarjeta = this.textoNoTarjeta.getText();
+        String encargado = this.textoEncargado.getText();
+        String division = this.textoDivision.getText();
+        String estado = this.textoEstado.getText();
+        if (estado.equals("1")) {
+
+            if (!noTarjeta.equals("")) {
+                TrasladoBien traslado = new TrasladoBien(this, true, noTarjeta, encargado, division);
+                traslado.setVisible(true);
+                recargarTabla();
+                eliminarDatos();
+            } else {
+                JOptionPane.showMessageDialog(null, "NO SE HA SELECCIONADO NINGUN BIEN PARA HACERLE UN TRASLADO");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "EL BIEN CON NO DE TARJETA: " + noTarjeta + " ESTA DADO DE BAJA, NO SE LE PUEDE REALIZAR UN TRASLADO");
+        }
+    }
+
+    public void eliminarDatos() {
+        this.textoEncargado.setText("");
+        this.textoDivision.setText("");
+        this.textoNoTarjeta.setText("");
+        this.textoProveedor.setText("");
+        this.textoTipoIngreso.setText("");
+        this.textoValor.setText("");
+        this.textoFecha.setText("");
+        this.textoEstado.setText("");
+    }
 
     public void borrarDatosFiltros() {
         this.filtroAnio.setYear(2020);
@@ -509,6 +809,10 @@ public class MenuInventario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser FiltroFechaFinal;
+    private javax.swing.JButton botonBaja;
+    private javax.swing.JButton botonEditar;
+    private javax.swing.JButton botonEliminarDatos;
+    private javax.swing.JButton botonTraslado;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JDesktopPane desktopPane;
@@ -548,6 +852,14 @@ public class MenuInventario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -561,7 +873,15 @@ public class MenuInventario extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JTable tablaBienes;
+    private javax.swing.JTextField textoDivision;
+    private javax.swing.JTextField textoEncargado;
+    private javax.swing.JTextField textoEstado;
+    private javax.swing.JTextField textoFecha;
     private javax.swing.JTextField textoFiltros;
+    private javax.swing.JTextField textoNoTarjeta;
+    private javax.swing.JTextField textoProveedor;
+    private javax.swing.JTextField textoTipoIngreso;
+    private javax.swing.JTextField textoValor;
     // End of variables declaration//GEN-END:variables
 
 }

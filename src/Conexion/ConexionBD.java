@@ -24,7 +24,7 @@ public class ConexionBD {
         if(connection == null){
             try {
 			String user = "jp";
-			String password = "suchi123";
+			String password = "Suchi123!";
 			// La url incluye el esquema a usar, en este caso 'mysql'
 			String urlConnection ="jdbc:mysql://localhost:3306/inventario";
 			//abrimos una coneccion a la DB usando una url, el usuario y password (SUSTITUIR PASSWORD)
