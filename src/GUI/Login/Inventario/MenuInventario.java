@@ -7,6 +7,7 @@ import Logica.ManejadorCreacionBien;
 import Logica.ManejadorPersonal;
 import Logica.ManejadorProveedores;
 import Logica.ManejadorTiposBien;
+import Objetos.EstructuraBien;
 import Objetos.PasarString;
 import Tablas.GeneradorModelos;
 import Tablas.TablaModelo;
@@ -635,7 +636,7 @@ public class MenuInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_filtrosItemStateChanged
 
     private void botonBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBajaActionPerformed
-        // TODO add your handling code here:
+       bajaBien();
     }//GEN-LAST:event_botonBajaActionPerformed
 
     private void botonBajaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBajaMouseExited
@@ -716,6 +717,30 @@ public class MenuInventario extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "EL BIEN CON NO DE TARJETA: " + noTarjeta + " ESTA DADO DE BAJA, NO SE PUEDE EDITAR SU INFORMACION");
+        }
+    }
+    public void bajaBien() {
+        String noTarjeta = this.textoNoTarjeta.getText();
+        String estado = this.textoEstado.getText();
+        String division = this.textoDivision.getText();
+        String encargado = this.textoEncargado.getText();
+        String fecha = this.textoFecha.getText();
+        String proveedor = this.textoProveedor.getText();
+        String tipoIngreso = this.textoTipoIngreso.getText();
+        String valor = this.textoValor.getText();
+
+        if (estado.equals("1")) {
+            if (!noTarjeta.equals("")) {
+                EstructuraBien bien = new EstructuraBien(noTarjeta,fecha, valor, division, encargado, estado, proveedor, tipoIngreso);
+                BajaBien baja = new BajaBien(this, true, bien);
+                baja.setVisible(true);
+                recargarTabla();
+                eliminarDatos();
+            } else {
+                JOptionPane.showMessageDialog(null, "NO SE HA SELECCIONADO NINGUN BIEN PARA DARLO DE BAJA");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "EL BIEN CON NO DE TARJETA: " + noTarjeta + " ESTA DADO DE BAJA, NO SE PUEDE VOLVER A DAR DE BAJA");
         }
     }
 

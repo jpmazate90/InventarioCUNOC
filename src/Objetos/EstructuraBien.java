@@ -34,6 +34,29 @@ public class EstructuraBien {
         this.noInventario = noInventario;
     }
 
+    public EstructuraBien(String noInventario, String fechaIngreso, String valorBien, String division, String encargadoActual, String estadoActual, String proveedor, String tipoIngreso) {
+        this.noInventario = noInventario;
+        this.fechaIngreso = fechaIngreso;
+        this.valorBien = valorBien;
+        this.division = division;
+        this.encargadoActual = encargadoActual;
+        this.estadoActual = estadoActual;
+        this.proveedor = proveedor;
+        this.tipoIngreso = tipoIngreso;
+    }
+
+    
+    
+    
+//    noTarjeta = this.textoNoTarjeta.getText();
+//        String estado = this.textoEstado.getText();
+//        String division = this.textoDivision.getText();
+//        String encargado = this.textoEncargado.getText();
+//        String fecha = this.textoFecha.getText();
+//        String proveedor = this.textoProveedor.getText();
+//        String tipoIngreso = this.textoTipoIngreso.getText();
+//        String valor
+
     public EstructuraBien(String noInventario, String unidadAcademica, String anioIngreso, String tipoBien, String noFactura, String fechaFactura, String fechaIngreso, String noSolicitudCompra, String noOrdenCompra, String noCUR, String valorBien, String division, String encargadoActual, String entidadCompra, String estadoActual, String proveedor, String tipoIngreso, String descripcion) {
         this.noInventario = noInventario;
         this.unidadAcademica = unidadAcademica;
