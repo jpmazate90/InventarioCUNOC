@@ -1,5 +1,6 @@
-package GUI.Login.Inventario;
+package GUI.Login.Administracion;
 
+import GUI.Login.Inventario.*;
 import GUI.Login.Login;
 import GUI.Login.VistasAuxiliares.AuxiliarEncargado;
 import GUI.Login.VistasAuxiliares.AuxiliarProveedor;
@@ -14,19 +15,23 @@ import Tablas.TablaModelo;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.WindowConstants;
 import javax.swing.table.TableRowSorter;
+import Exportacion.ExportarPDF;
 
 /**
  *
  * @author jpmazate
  */
-public class MenuInventario extends javax.swing.JFrame {
+public class Reportes extends javax.swing.JFrame {
 
     private String usuarioActual;
     private String codigoBuscar;
@@ -36,16 +41,19 @@ public class MenuInventario extends javax.swing.JFrame {
     private TablaModelo modelo;
     private ManejadorCreacionBien manejadorCreacionBienes;
     private SimpleDateFormat fechaCompleta;
+    private SimpleDateFormat fechaTimestamp;
 
-    public MenuInventario(String usuarioActual) {
+    public Reportes(String usuarioActual) {
         initComponents();
         this.usuarioActual = usuarioActual;
         manejadorTiposBien = new ManejadorTiposBien();
         manejadorCreacionBienes = new ManejadorCreacionBien();
         fechaCompleta = new SimpleDateFormat("yyyy-MM-dd");
+        fechaTimestamp = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         llenarFiltros();
         iniciarDatosBienes();
         FiltroFechaFinal.updateUI();
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
     }
 
@@ -80,7 +88,6 @@ public class MenuInventario extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new javax.swing.JDesktopPane();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -144,29 +151,29 @@ public class MenuInventario extends javax.swing.JFrame {
         textoFecha = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         textoEstado = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        textoTotalActivos = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
+        textoTotalRegistros = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        textoFechaReporte = new javax.swing.JTextField();
         menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inventario_opt.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        desktopPane.add(jLabel1);
-        jLabel1.setBounds(20, 10, 100, 70);
-
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
-        jLabel2.setText("AREA DE TRABAJO DE INVENTARIO");
+        jLabel2.setText("AREA DE REPORTES");
         desktopPane.add(jLabel2);
         jLabel2.setBounds(760, 30, 430, 18);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inventario2_opt.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reporte.jpg"))); // NOI18N
         jLabel3.setText("jLabel3");
         desktopPane.add(jLabel3);
-        jLabel3.setBounds(1720, 10, 100, 60);
+        jLabel3.setBounds(10, 0, 230, 80);
 
         jLabel6.setText("NoTarjeta:");
         desktopPane.add(jLabel6);
@@ -279,7 +286,7 @@ public class MenuInventario extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaBienes);
 
         desktopPane.add(jScrollPane1);
-        jScrollPane1.setBounds(360, 130, 1450, 520);
+        jScrollPane1.setBounds(360, 130, 1450, 480);
 
         filtros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO TARJETA", "UNIDAD ACADEMICA", "AÑO INGRESO", "TIPO BIEN", "NO FACTURA", "FECHA INGRESO", "TIPO INGRESO", "ESTADO ACTUAL", "ENCARGADO ACTUAL", "DIVISION", "PROVEEDOR", "VALOR BIEN" }));
         filtros.addItemListener(new java.awt.event.ItemListener() {
@@ -410,7 +417,7 @@ public class MenuInventario extends javax.swing.JFrame {
         botonBaja.setBackground(new java.awt.Color(92, 138, 184));
         botonBaja.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         botonBaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha_opt.jpg"))); // NOI18N
-        botonBaja.setText("Baja de Bien");
+        botonBaja.setText("IMPRIMIR REPORTE");
         botonBaja.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 botonBajaMouseEntered(evt);
@@ -430,7 +437,7 @@ public class MenuInventario extends javax.swing.JFrame {
         botonTraslado.setBackground(new java.awt.Color(92, 138, 184));
         botonTraslado.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         botonTraslado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carrito_opt.jpg"))); // NOI18N
-        botonTraslado.setText("Traslado de Bien");
+        botonTraslado.setText("VER TRASLADOS  DEL BIEN");
         botonTraslado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 botonTrasladoMouseEntered(evt);
@@ -445,12 +452,12 @@ public class MenuInventario extends javax.swing.JFrame {
             }
         });
         desktopPane.add(botonTraslado);
-        botonTraslado.setBounds(800, 770, 300, 120);
+        botonTraslado.setBounds(760, 770, 360, 120);
 
         botonEditar.setBackground(new java.awt.Color(92, 138, 184));
         botonEditar.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         botonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar_opt.png"))); // NOI18N
-        botonEditar.setText("Editar Bien");
+        botonEditar.setText("VER BAJAS BIENES");
         botonEditar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 botonEditarMouseEntered(evt);
@@ -505,20 +512,34 @@ public class MenuInventario extends javax.swing.JFrame {
         desktopPane.add(textoEstado);
         textoEstado.setBounds(1600, 720, 210, 35);
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("Crear Bien");
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reporte.jpg"))); // NOI18N
+        jLabel28.setText("jLabel3");
+        desktopPane.add(jLabel28);
+        jLabel28.setBounds(1580, 0, 230, 80);
 
-        openMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Ir a crear un bien");
-        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                openMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(openMenuItem);
+        jLabel1.setText("TOTAL ACTIVO:");
+        desktopPane.add(jLabel1);
+        jLabel1.setBounds(1490, 630, 110, 18);
 
-        menuBar.add(fileMenu);
+        textoTotalActivos.setEditable(false);
+        desktopPane.add(textoTotalActivos);
+        textoTotalActivos.setBounds(1600, 620, 210, 35);
+
+        jLabel29.setText("TOTAL REGISTROS:");
+        desktopPane.add(jLabel29);
+        jLabel29.setBounds(1120, 630, 130, 18);
+
+        textoTotalRegistros.setEditable(false);
+        desktopPane.add(textoTotalRegistros);
+        textoTotalRegistros.setBounds(1270, 620, 210, 35);
+
+        jLabel30.setText("Rerporte hecho a las:");
+        desktopPane.add(jLabel30);
+        jLabel30.setBounds(670, 630, 150, 18);
+
+        textoFechaReporte.setEditable(false);
+        desktopPane.add(textoFechaReporte);
+        textoFechaReporte.setBounds(829, 620, 260, 35);
 
         jMenu1.setText("Cerrar Sesion");
 
@@ -574,14 +595,10 @@ public class MenuInventario extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
-        CrearBien ventana = new CrearBien(this.usuarioActual);
-        ventana.setVisible(true);
-    }//GEN-LAST:event_openMenuItemActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         recargarTabla();
         hacerFiltros();
+        accionReporteSinFiltros();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -601,6 +618,7 @@ public class MenuInventario extends javax.swing.JFrame {
 
         tablaSorteada = new TableRowSorter(modelo);
         tablaBienes.setRowSorter(tablaSorteada);
+        accionReporte();
     }//GEN-LAST:event_textoFiltrosKeyTyped
 
     private void filtrosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filtrosItemStateChanged
@@ -609,10 +627,11 @@ public class MenuInventario extends javax.swing.JFrame {
         tablaSorteada = new TableRowSorter(modelo);
         tablaSorteada.setRowFilter(RowFilter.regexFilter("(?i)" + textoFiltros.getText(), valor));
         tablaBienes.setRowSorter(tablaSorteada);
+        accionReporte();
     }//GEN-LAST:event_filtrosItemStateChanged
 
     private void botonBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBajaActionPerformed
-       bajaBien();
+        generarReporte();
     }//GEN-LAST:event_botonBajaActionPerformed
 
     private void botonBajaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBajaMouseExited
@@ -644,7 +663,6 @@ public class MenuInventario extends javax.swing.JFrame {
     private void tablaBienesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaBienesMouseClicked
 
         int seleccion = tablaBienes.getSelectedRow();// recoge la selecion
-
         this.textoNoTarjeta.setText((String) tablaBienes.getValueAt(seleccion, 0));
         this.textoEncargado.setText((String) tablaBienes.getValueAt(seleccion, 8));
         this.textoTipoIngreso.setText((String) tablaBienes.getValueAt(seleccion, 6));
@@ -667,7 +685,7 @@ public class MenuInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_botonEliminarDatosMouseExited
 
     private void botonTrasladoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonTrasladoActionPerformed
-        trasladoBien();
+       verTrasladosBien();
     }//GEN-LAST:event_botonTrasladoActionPerformed
 
     private void botonEliminarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarDatosActionPerformed
@@ -675,69 +693,115 @@ public class MenuInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_botonEliminarDatosActionPerformed
 
     private void botonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarActionPerformed
-        editarBien();
+       verBajasBienes();
 
     }//GEN-LAST:event_botonEditarActionPerformed
 
-    public void editarBien() {
-        String noTarjeta = this.textoNoTarjeta.getText();
-        String estado = this.textoEstado.getText();
-        if (estado.equals("1")) {
-            if (!noTarjeta.equals("")) {
-                EditarBien editar = new EditarBien(this, true, noTarjeta);
-                editar.setVisible(true);
-                recargarTabla();
-                eliminarDatos();
-            } else {
-                JOptionPane.showMessageDialog(null, "NO SE HA SELECCIONADO NINGUN BIEN PARA EDITARLO");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "EL BIEN CON NO DE TARJETA: " + noTarjeta + " ESTA DADO DE BAJA, NO SE PUEDE EDITAR SU INFORMACION");
+    
+    public void verTrasladosBien(){
+        String noInventario = this.textoNoTarjeta.getText();
+        if(!noInventario.equals("")){
+            VerTrasladosBien ver = new VerTrasladosBien(this,true, this, noInventario,this.usuarioActual);
+            ver.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "NO SE HA SELECCIONADO NINGUN BIEN PARA VER SUS TRASLADOS");
         }
     }
-    public void bajaBien() {
-        String noTarjeta = this.textoNoTarjeta.getText();
-        String estado = this.textoEstado.getText();
-        String division = this.textoDivision.getText();
-        String encargado = this.textoEncargado.getText();
-        String fecha = this.textoFecha.getText();
-        String proveedor = this.textoProveedor.getText();
-        String tipoIngreso = this.textoTipoIngreso.getText();
-        String valor = this.textoValor.getText();
+    
+    public void verBajasBienes(){
+        VerBajaBienes ver = new VerBajaBienes(this, true, usuarioActual);
+        ver.setVisible(true);
+    }
+    
+    public void generarReporte() {
 
-        if (estado.equals("1")) {
-            if (!noTarjeta.equals("")) {
-                EstructuraBien bien = new EstructuraBien(noTarjeta,fecha, valor, division, encargado, estado, proveedor, tipoIngreso);
-                BajaBien baja = new BajaBien(this, true, bien);
-                baja.setVisible(true);
-                recargarTabla();
-                eliminarDatos();
+        if (existenElementosParaImprimir()) {
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            File archivo = ExportarPDF.usarFileChooser(".pdf");
+            if (archivo.getName().equals("null.pdf") == false) {// exporta a html segun el reporte
+                double totalActivo = totalActivo();
+                int totalRegistros = totalRegistros();
+                ArrayList<String> filtrosPrimarios = filtrosPrimarios();
+                ArrayList<String> filtrosSecundarios = filtrosSecundarios();
+                ExportarPDF.exportarReportes(tablaBienes, totalActivo, totalRegistros, usuarioActual, this.textoFechaReporte.getText(), filtrosPrimarios, filtrosSecundarios, archivo);
+
             } else {
-                JOptionPane.showMessageDialog(null, "NO SE HA SELECCIONADO NINGUN BIEN PARA DARLO DE BAJA");
+                JOptionPane.showMessageDialog(null, "NO SE HA SELECCIONADO NINGUNA RUTA PARA GUARDAR EL ARCHIVO, NO SE REALIZARA NINGUNA ACCION");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "EL BIEN CON NO DE TARJETA: " + noTarjeta + " ESTA DADO DE BAJA, NO SE PUEDE VOLVER A DAR DE BAJA");
+            JOptionPane.showMessageDialog(null, "NO EXISTEN ELEMENTOS EN LA TABLA PARA REALIZAR UN ARCHIVO DEL REPORTE");
         }
     }
 
-    public void trasladoBien() {
-        String noTarjeta = this.textoNoTarjeta.getText();
-        String encargado = this.textoEncargado.getText();
-        String division = this.textoDivision.getText();
-        String estado = this.textoEstado.getText();
-        if (estado.equals("1")) {
-
-            if (!noTarjeta.equals("")) {
-                TrasladoBien traslado = new TrasladoBien(this, true, noTarjeta, encargado, division);
-                traslado.setVisible(true);
-                recargarTabla();
-                eliminarDatos();
-            } else {
-                JOptionPane.showMessageDialog(null, "NO SE HA SELECCIONADO NINGUN BIEN PARA HACERLE UN TRASLADO");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "EL BIEN CON NO DE TARJETA: " + noTarjeta + " ESTA DADO DE BAJA, NO SE LE PUEDE REALIZAR UN TRASLADO");
+    /*JTable modelo, int totalActivo, int totalRegistros, String usuarioAdministrador, 
+                    String fechaReporte, ArrayList<String> filtrosPrimarios,ArrayList<String> filtrosSecundarios , 
+                            File archivo) {*/
+    public double totalActivo() {
+        double valor = 0;
+        for (int i = 0; i < tablaBienes.getRowCount(); i++) {
+            valor += Float.parseFloat((String) tablaBienes.getValueAt(i, 11));
         }
+        return valor;
+    }
+
+    public int totalRegistros() {
+        return this.tablaBienes.getRowCount();
+    }
+
+    public boolean existenElementosParaImprimir() {
+        return this.tablaBienes.getRowCount() != 0;
+    }
+
+    public ArrayList<String> filtrosPrimarios() {
+        ArrayList<String> mandar = new ArrayList<>();
+        if (!this.filtroNoTarjeta.getText().equals("")) {
+            mandar.add("Numero de Tarjeta: "+this.filtroNoTarjeta.getText());
+        }
+        if (!this.filtroUnidad.getText().equals("")) {
+            mandar.add("Unidad Academica+ "+this.filtroUnidad.getText());
+        }
+        if (this.filtroCheckBoxAnio.isSelected()) {
+            mandar.add("Año de Ingreso: "+this.filtroAnio.getYear());
+        }
+        if (this.filtroTipoBien.getSelectedIndex() != 0) {
+            mandar.add("Tipo de Bien: "+this.filtroTipoBien.getSelectedItem().toString());
+        }
+        if (this.filtroCheckBoxFechaInicial.isSelected()) {
+            mandar.add("Fecha Inicial: "+fechaCompleta.format(this.filtroFechaInicial.getDate()));
+        }
+        if (this.filtroCheckBoxFechaFinal.isSelected()) {
+            mandar.add("Fecha Final: "+fechaCompleta.format(this.FiltroFechaFinal.getDate()));
+        }
+        if (this.filtroTipoIngreso.getSelectedIndex() != 0) {
+            mandar.add("Tipo de Ingreso: "+this.filtroTipoIngreso.getSelectedItem().toString());
+        }
+        if (this.filtroEstadoActual.getSelectedIndex() != 0) {
+            mandar.add("Estado Actual: "+this.filtroEstadoActual.getSelectedItem().toString());
+        }
+        if (!this.filtroEncargadoActual.getText().equals("")) {
+            mandar.add("Encargado Actual: "+this.filtroEncargadoActual.getText());
+        }
+        if (!this.filtroDivision.getText().equals("")) {
+            mandar.add("Division: "+ this.filtroDivision.getText());
+        }
+        if (!this.filtroProveedor.getText().equals("")) {
+            mandar.add("Proveedor: "+this.filtroProveedor.getText());
+        }
+        if (!this.filtroValorInicial.getText().equals("")) {
+            mandar.add("Valor Inicial: "+this.filtroValorInicial.getText());
+        }
+        if (!this.filtroValorFinal.getText().equals("")) {
+            mandar.add("Valor Final: "+ this.filtroValorFinal.getText());
+        }
+        return mandar;
+    }
+
+    public ArrayList<String> filtrosSecundarios() {
+        ArrayList<String> mandar = new ArrayList<>();
+        if (!textoFiltros.getText().equals("")) {
+            mandar.add(filtros.getSelectedItem().toString() + ": " + textoFiltros.getText());
+        }
+        return mandar;
     }
 
     public void eliminarDatos() {
@@ -799,11 +863,47 @@ public class MenuInventario extends javax.swing.JFrame {
         String valorInicial = this.filtroValorInicial.getText();
         String valorfinal = this.filtroValorFinal.getText();
 
-
         iniciarDatosBienes();
         manejadorCreacionBienes.buscarBien(notarjeta, unidad, anio, tipoBien, noFactura,
                 fechaInicial, fechaFinal, tipoIngreso, estadoActual, encargadoActual,
                 division, proveedor, valorInicial, valorfinal, modelo);
+
+    }
+
+    public void accionReporte() {
+        if (tablaBienes.getRowSorter() != null) {
+            TableRowSorter aux = (TableRowSorter) tablaBienes.getRowSorter();
+            if (aux.getViewRowCount() > 0) {
+                this.textoFechaReporte.setText(fechaTimestamp.format(new Date()));
+                double valor = 0;
+                for (int i = 0; i < tablaBienes.getRowCount(); i++) {
+                    valor += Double.parseDouble((String) tablaBienes.getValueAt(i, 11));
+                }
+                this.textoTotalActivos.setText(Double.toString(valor));
+                this.textoTotalRegistros.setText(Integer.toString(tablaBienes.getRowCount()));
+            } else {
+                this.textoFechaReporte.setText("");
+                this.textoTotalActivos.setText("");
+                this.textoTotalRegistros.setText("");
+            }
+        }
+    }
+
+    public void accionReporteSinFiltros() {
+        if (tablaBienes.getRowCount() > 0) {
+            this.textoFechaReporte.setText(fechaTimestamp.format(new Date()));
+            double valor = 0;
+            for (int i = 0; i < tablaBienes.getRowCount(); i++) {
+                valor += Double.parseDouble((String) tablaBienes.getValueAt(i, 11));
+            }
+            this.textoTotalActivos.setText(Double.toString(valor));
+            this.textoTotalRegistros.setText(Integer.toString(tablaBienes.getRowCount()));
+        } else {
+            this.textoFechaReporte.setText("");
+            this.textoTotalActivos.setText("");
+            this.textoTotalRegistros.setText("");
+        }
+
     }
 
 
@@ -814,7 +914,6 @@ public class MenuInventario extends javax.swing.JFrame {
     private javax.swing.JButton botonEliminarDatos;
     private javax.swing.JButton botonTraslado;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenu fileMenu;
     private com.toedter.calendar.JYearChooser filtroAnio;
     private javax.swing.JCheckBox filtroCheckBoxAnio;
     private javax.swing.JCheckBox filtroCheckBoxFechaFinal;
@@ -856,7 +955,10 @@ public class MenuInventario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -867,16 +969,18 @@ public class MenuInventario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JTable tablaBienes;
     private javax.swing.JTextField textoDivision;
     private javax.swing.JTextField textoEncargado;
     private javax.swing.JTextField textoEstado;
     private javax.swing.JTextField textoFecha;
+    private javax.swing.JTextField textoFechaReporte;
     private javax.swing.JTextField textoFiltros;
     private javax.swing.JTextField textoNoTarjeta;
     private javax.swing.JTextField textoProveedor;
     private javax.swing.JTextField textoTipoIngreso;
+    private javax.swing.JTextField textoTotalActivos;
+    private javax.swing.JTextField textoTotalRegistros;
     private javax.swing.JTextField textoValor;
     // End of variables declaration//GEN-END:variables
 

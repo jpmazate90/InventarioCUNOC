@@ -12,7 +12,7 @@ import javax.swing.JTable;
  * @author jpmazate
  */
 public class GeneradorModelos {
-    
+
     public static void modeloUsuarios(TablaModelo modelo) {
         modelo.addColumn("USUARIO");
         modelo.addColumn("NOMBRE COMPLETO");
@@ -24,7 +24,7 @@ public class GeneradorModelos {
         modelo.addColumn("FECHA EDITADO");
 
     }
-    
+
     public static void modeloProveedores(TablaModelo modelo) {
         modelo.addColumn("NIT");
         modelo.addColumn("NOMBRE EMPRESA");
@@ -34,8 +34,7 @@ public class GeneradorModelos {
         modelo.addColumn("FECHA CREACION");
         modelo.addColumn("FECHA EDITADO");
     }
-    
-    
+
     public static void modeloAuxiliarProveedores(TablaModelo modelo) {
         modelo.addColumn("NIT");
         modelo.addColumn("NOMBRE EMPRESA");
@@ -43,7 +42,7 @@ public class GeneradorModelos {
         modelo.addColumn("AREA TRABAJO");
         modelo.addColumn("TELEFONO");
     }
-    
+
     public static void modeloPersonal(TablaModelo modelo) {
         modelo.addColumn("NO PERSONAL");
         modelo.addColumn("NOMBRE COMPLETO");
@@ -56,21 +55,21 @@ public class GeneradorModelos {
         modelo.addColumn("FECHA CREACION");
         modelo.addColumn("FECHA EDITADO");
     }
-    
+
     public static void modeloAuxiliarEncargado(TablaModelo modelo) {
         modelo.addColumn("NO PERSONAL");
         modelo.addColumn("NOMBRE COMPLETO");
         modelo.addColumn("DPI");
-        modelo.addColumn("AREA TRABAJO");        
+        modelo.addColumn("AREA TRABAJO");
     }
-    
-     public static void modeloTiposBien(TablaModelo modelo) {
+
+    public static void modeloTiposBien(TablaModelo modelo) {
         modelo.addColumn("CODIGO");
         modelo.addColumn("NOMBRE");
-        
+
     }
-    
-        public static void modeloBienes(TablaModelo modelo) {
+
+    public static void modeloBienes(TablaModelo modelo) {
         modelo.addColumn("NOINVENTARIO");
         modelo.addColumn("UNIDAD");
         modelo.addColumn("ANIO");
@@ -82,12 +81,30 @@ public class GeneradorModelos {
         modelo.addColumn("ENCARGADO");
         modelo.addColumn("DIVISION");
         modelo.addColumn("PROVEEDOR");
-        modelo.addColumn("VALOR");                                
+        modelo.addColumn("VALOR");
+    }
+
+    public static void modeloTraslados(TablaModelo modelo) {
+        modelo.addColumn("ID");
+        modelo.addColumn("NOINVENTARIO");
+        modelo.addColumn("RESPONSABLE NUEVO");
+        modelo.addColumn("RESPONSABLE ANTERIOR");
+        modelo.addColumn("FECHA TRASLADO");
+        modelo.addColumn("MOTIVOTRASLADO");
+        modelo.addColumn("DIVISION");
+    }
+    public static void modeloBaja(TablaModelo modelo) {
+        modelo.addColumn("ID");
+        modelo.addColumn("NO INVENTARIO");
+        modelo.addColumn("NO ACUERDO CONSEJO");
+        modelo.addColumn("NO REFERENCIA AUDITORIA");
+        modelo.addColumn("FECHA BAJA");
     }
     
     
+
     public static void asignarModeloTabla(TablaModelo modelo, JTable tabla) {
         tabla.setModel(modelo);
     }
-    
+
 }

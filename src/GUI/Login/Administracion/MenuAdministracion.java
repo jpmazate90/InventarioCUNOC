@@ -90,7 +90,12 @@ public class MenuAdministracion extends javax.swing.JFrame {
         jMenu1.setText("Reportes");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Reporte1");
+        jMenuItem1.setText("Ver Reportes");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         menuBar.add(jMenu1);
@@ -164,6 +169,12 @@ public class MenuAdministracion extends javax.swing.JFrame {
        ventana.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+     Reportes ventana = new Reportes(usuarioActual);
+     ventana.setVisible(true);
+     
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
