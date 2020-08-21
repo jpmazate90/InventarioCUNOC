@@ -21,7 +21,7 @@ public class TrasladoBien extends javax.swing.JDialog {
     public TrasladoBien(java.awt.Frame parent, boolean modal, String noInventario, String encargado, String division) {
         super(parent, modal);
         initComponents();
-        
+         this.getRootPane().setDefaultButton(jButton2);
         manejadorTrasladoBien = new ManejadorTrasladoBien();
         formateador = new SimpleDateFormat("yyyy-MM-dd");
         this.noInventario = noInventario;
@@ -58,7 +58,8 @@ public class TrasladoBien extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Traslado de Bien");
+        setTitle("TRASLADO DE BIEN");
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setText("TRASLADO DE BIEN");

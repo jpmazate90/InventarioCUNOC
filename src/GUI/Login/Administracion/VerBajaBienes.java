@@ -142,6 +142,7 @@ public class VerBajaBienes extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         filtros = new javax.swing.JComboBox<>();
@@ -166,8 +167,14 @@ public class VerBajaBienes extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         textoFechaHoraReporte = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+
+        jLabel11.setText("jLabel11");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("REPORTE BAJA DE BIENES");
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
@@ -257,14 +264,16 @@ public class VerBajaBienes extends javax.swing.JDialog {
                 botonImprimirActionPerformed(evt);
             }
         });
-        getContentPane().add(botonImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 580, 250, -1));
+        getContentPane().add(botonImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 580, 250, -1));
 
         jLabel9.setText("Fecha y Hora del Reporte:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 590, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 590, -1, -1));
 
         textoFechaHoraReporte.setEditable(false);
-        getContentPane().add(textoFechaHoraReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 590, 310, -1));
+        getContentPane().add(textoFechaHoraReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 580, 310, -1));
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 740, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 320, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 730, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -314,6 +323,9 @@ public class VerBajaBienes extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

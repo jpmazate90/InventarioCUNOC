@@ -26,6 +26,11 @@ public class MenuAdministracion extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         verUsuarios = new javax.swing.JMenuItem();
@@ -41,6 +46,33 @@ public class MenuAdministracion extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("MENU ADMINISTRACION");
+        setResizable(false);
+
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        jLabel1.setText("MENU ADMINISTRACION");
+        desktopPane.add(jLabel1);
+        jLabel1.setBounds(110, 30, 430, 29);
+
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 2, 18)); // NOI18N
+        jLabel2.setText("SELECCIONA ALGUNA OPCION");
+        desktopPane.add(jLabel2);
+        jLabel2.setBounds(110, 100, 430, 29);
+
+        jLabel3.setFont(new java.awt.Font("Ubuntu", 2, 18)); // NOI18N
+        jLabel3.setText("DE ARRIBA ( PRUEBA USANDO");
+        desktopPane.add(jLabel3);
+        jLabel3.setBounds(110, 140, 430, 29);
+
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 2, 18)); // NOI18N
+        jLabel4.setText("ABREVIACIONES)");
+        desktopPane.add(jLabel4);
+        jLabel4.setBounds(110, 180, 430, 29);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logoUsac.png"))); // NOI18N
+        jLabel5.setText("jLabel5");
+        desktopPane.add(jLabel5);
+        jLabel5.setBounds(450, 110, 100, 100);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Usuarios");
@@ -132,11 +164,11 @@ public class MenuAdministracion extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
         );
 
         pack();
@@ -184,6 +216,11 @@ public class MenuAdministracion extends javax.swing.JFrame {
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

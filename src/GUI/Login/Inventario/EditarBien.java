@@ -377,6 +377,8 @@ public class EditarBien extends javax.swing.JDialog {
         textoValorBien = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("EDITAR BIEN");
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
@@ -499,7 +501,7 @@ public class EditarBien extends javax.swing.JDialog {
                 botonProveedorActionPerformed(evt);
             }
         });
-        getContentPane().add(botonProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 330, 60, 20));
+        getContentPane().add(botonProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 330, 40, 20));
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 700, -1, -1));
 
         textoValorBien.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.00"))));

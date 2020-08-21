@@ -230,15 +230,24 @@ public class Usuarios extends javax.swing.JFrame {
         botonContrasena = new javax.swing.JButton();
         botonVolver = new javax.swing.JButton();
         boton2Cambiar = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("AREA DE USUARIOS");
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         jLabel1.setText("USUARIOS DEL SISTEMA");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(597, 48, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/User_opt.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 22, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/User2_opt.jpg"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1338, 22, -1, -1));
 
         tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -258,13 +267,17 @@ public class Usuarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaUsuarios);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 169, 1438, 282));
+
         jLabel4.setText("Filtar por:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 136, -1, -1));
 
         filtro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 filtroKeyTyped(evt);
             }
         });
+        getContentPane().add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(285, 128, 1165, -1));
 
         tiposFiltros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario", "NombreCompleto", "Dpi", "Area de Trabajo", "Tipo de Usuario", "Estado" }));
         tiposFiltros.addItemListener(new java.awt.event.ItemListener() {
@@ -277,24 +290,37 @@ public class Usuarios extends javax.swing.JFrame {
                 tiposFiltrosMouseExited(evt);
             }
         });
+        getContentPane().add(tiposFiltros, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 128, -1, -1));
 
         jLabel5.setText("Usuario:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 477, -1, -1));
 
         jLabel6.setText("Nombre Completo:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 522, -1, -1));
 
         jLabel7.setText("Dpi:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 575, -1, -1));
 
         jLabel8.setText("Area de Trabajo");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 470, -1, -1));
 
         jLabel9.setText("Tipo de Usuario:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 520, -1, -1));
 
         jLabel10.setText("Estado:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 570, -1, -1));
 
-        textoUsuario.setEnabled(false);
+        textoUsuario.setEditable(false);
+        getContentPane().add(textoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 469, 486, -1));
+        getContentPane().add(textoDpi, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 567, 486, -1));
+        getContentPane().add(textoAreaTrabajo, new org.netbeans.lib.awtextra.AbsoluteConstraints(782, 469, 668, -1));
 
-        textoTipoUsuario.setEnabled(false);
+        textoTipoUsuario.setEditable(false);
+        getContentPane().add(textoTipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(782, 522, 668, -1));
 
-        textoEstado.setEnabled(false);
+        textoEstado.setEditable(false);
+        getContentPane().add(textoEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(782, 575, 668, -1));
+        getContentPane().add(textoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 522, 486, -1));
 
         jButton1.setText("Guardar Cambios");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -302,6 +328,7 @@ public class Usuarios extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 628, 170, -1));
 
         botonCambiarContrasena.setText("Cambiar Contraseña");
         botonCambiarContrasena.addActionListener(new java.awt.event.ActionListener() {
@@ -309,6 +336,7 @@ public class Usuarios extends javax.swing.JFrame {
                 botonCambiarContrasenaActionPerformed(evt);
             }
         });
+        getContentPane().add(botonCambiarContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(497, 628, -1, -1));
 
         botonDeshabilitar.setText("Deshabilitar Usuario");
         botonDeshabilitar.addActionListener(new java.awt.event.ActionListener() {
@@ -316,6 +344,7 @@ public class Usuarios extends javax.swing.JFrame {
                 botonDeshabilitarActionPerformed(evt);
             }
         });
+        getContentPane().add(botonDeshabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 630, 300, -1));
 
         botonHabilitar.setText("Habilitar Usuario");
         botonHabilitar.addActionListener(new java.awt.event.ActionListener() {
@@ -323,6 +352,7 @@ public class Usuarios extends javax.swing.JFrame {
                 botonHabilitarActionPerformed(evt);
             }
         });
+        getContentPane().add(botonHabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 630, 290, -1));
 
         jButton5.setText("Crear Usuario");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -330,10 +360,15 @@ public class Usuarios extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 662, 170, -1));
+        getContentPane().add(textoConfirmacionContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 747, 470, -1));
 
         labelContrasena.setText("Contraseña");
+        getContentPane().add(labelContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 696, -1, -1));
 
         labelConfirmarContrasena.setText("Confirmar Contraseña");
+        getContentPane().add(labelConfirmarContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 747, -1, -1));
+        getContentPane().add(textoContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 696, 470, -1));
 
         botonConfirmarContrasena.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MostrarContrasena.png"))); // NOI18N
         botonConfirmarContrasena.addActionListener(new java.awt.event.ActionListener() {
@@ -341,6 +376,7 @@ public class Usuarios extends javax.swing.JFrame {
                 botonConfirmarContrasenaActionPerformed(evt);
             }
         });
+        getContentPane().add(botonConfirmarContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(666, 747, 36, 35));
 
         botonContrasena.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MostrarContrasena.png"))); // NOI18N
         botonContrasena.addActionListener(new java.awt.event.ActionListener() {
@@ -348,6 +384,7 @@ public class Usuarios extends javax.swing.JFrame {
                 botonContrasenaActionPerformed(evt);
             }
         });
+        getContentPane().add(botonContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(666, 696, 36, 35));
 
         botonVolver.setText("Ocultar");
         botonVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -355,6 +392,7 @@ public class Usuarios extends javax.swing.JFrame {
                 botonVolverActionPerformed(evt);
             }
         });
+        getContentPane().add(botonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(502, 800, 146, -1));
 
         boton2Cambiar.setText("Confirmar");
         boton2Cambiar.addActionListener(new java.awt.event.ActionListener() {
@@ -362,160 +400,10 @@ public class Usuarios extends javax.swing.JFrame {
                 boton2CambiarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel2)
-                .addGap(459, 459, 459)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 479, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(24, 24, 24))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tiposFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(filtro))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(96, 96, 96)
-                                .addComponent(textoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                                        .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel7)
-                                                .addGap(123, 123, 123))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(labelContrasena)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(textoDpi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(botonCambiarContrasena))
-                                            .addComponent(textoContrasena, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel9))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(botonDeshabilitar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 397, Short.MAX_VALUE)
-                                .addComponent(botonHabilitar))
-                            .addComponent(textoAreaTrabajo)
-                            .addComponent(textoTipoUsuario)
-                            .addComponent(textoEstado)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(botonContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(labelConfirmarContrasena)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(157, 157, 157)
-                                    .addComponent(boton2Cambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(botonVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(textoConfirmacionContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addComponent(botonConfirmarContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tiposFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel8)
-                    .addComponent(textoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textoAreaTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(textoTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(textoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textoDpi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(botonCambiarContrasena))
-                    .addComponent(botonDeshabilitar)
-                    .addComponent(botonHabilitar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(botonContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(labelContrasena)
-                    .addComponent(textoContrasena))
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(botonConfirmarContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(labelConfirmarContrasena)
-                    .addComponent(textoConfirmacionContrasena))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonVolver)
-                    .addComponent(boton2Cambiar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(boton2Cambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 800, 161, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(712, 834, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 850, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 620, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -615,6 +503,9 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

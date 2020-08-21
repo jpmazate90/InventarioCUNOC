@@ -111,8 +111,11 @@ public class VerTrasladosBien extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         botonImprimir = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("REPORTE TRASLADOS DE BIEN");
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
@@ -189,7 +192,7 @@ public class VerTrasladosBien extends javax.swing.JDialog {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 50, 30));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 50, 20));
 
         jLabel8.setText("Responsable Nuevo");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, -1, -1));
@@ -206,11 +209,11 @@ public class VerTrasladosBien extends javax.swing.JDialog {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 470, 50, 30));
-        getContentPane().add(textoFechaReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 580, 150, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 470, 50, 20));
+        getContentPane().add(textoFechaReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 570, 260, -1));
 
         jLabel10.setText("Fecha y Hora del Reporte:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 580, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 580, -1, -1));
 
         botonImprimir.setBackground(new java.awt.Color(92, 138, 184));
         botonImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha_opt.jpg"))); // NOI18N
@@ -228,8 +231,9 @@ public class VerTrasladosBien extends javax.swing.JDialog {
                 botonImprimirActionPerformed(evt);
             }
         });
-        getContentPane().add(botonImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 570, 240, -1));
+        getContentPane().add(botonImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 570, 240, -1));
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 730, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 320, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -353,6 +357,7 @@ public class VerTrasladosBien extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

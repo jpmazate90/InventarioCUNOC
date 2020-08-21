@@ -32,6 +32,7 @@ public class Proveedores extends javax.swing.JFrame {
         modelo = new TablaModelo();
         manejadorProveedores = new ManejadorProveedores();
         asignarDatosProveedores();
+         this.getRootPane().setDefaultButton(this.jButton1);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
@@ -273,6 +274,8 @@ public class Proveedores extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("PROVEEDORES");
+        setResizable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/proveedor2_opt.jpg"))); // NOI18N
 
@@ -324,19 +327,19 @@ public class Proveedores extends javax.swing.JFrame {
 
         jLabel9.setText("Telefono:");
 
-        textoNit.setEnabled(false);
+        textoNit.setEditable(false);
 
         jLabel10.setText("CREAR PROVEEDOR");
 
-        jLabel11.setText("NIT:");
+        jLabel11.setText("*NIT:");
 
-        jLabel12.setText("Nombre:");
+        jLabel12.setText("*Nombre:");
 
-        jLabel13.setText("Direccion:");
+        jLabel13.setText("*Direccion:");
 
-        jLabel14.setText("Area Trabajo:");
+        jLabel14.setText("*Area Trabajo:");
 
-        jLabel15.setText("Telefono:");
+        jLabel15.setText("*Telefono:");
 
         jButton1.setText("Crear Proveedor");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -421,10 +424,10 @@ public class Proveedores extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel10)
-                                        .addGap(316, 316, 316))
-                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))))))
+                                        .addGap(126, 126, 126)))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -447,11 +450,15 @@ public class Proveedores extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(textoNit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(textoNit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel10)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)

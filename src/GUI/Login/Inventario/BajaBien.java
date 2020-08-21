@@ -99,8 +99,11 @@ public class BajaBien extends javax.swing.JDialog {
         campoNoReferencia = new javax.swing.JTextField();
         campoNoAcuerdo = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("BAJA DE BIEN");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -109,10 +112,10 @@ public class BajaBien extends javax.swing.JDialog {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 180, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha_opt.jpg"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha_opt.jpg"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, -1, -1));
 
         jLabel1.setText("No Inventario:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
@@ -164,10 +167,10 @@ public class BajaBien extends javax.swing.JDialog {
         getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, -1, -1));
 
         jLabel8.setText("No Acuerdo Consejo:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, -1));
 
         jLabel9.setText("No Referencia Auditoria:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
         getContentPane().add(campoNoReferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, 410, -1));
         getContentPane().add(campoNoAcuerdo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 410, -1));
 
@@ -178,7 +181,9 @@ public class BajaBien extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 370, 300, 120));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 370, 300, 110));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 270, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 520, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -193,6 +198,8 @@ public class BajaBien extends javax.swing.JDialog {
     private javax.swing.JTextField campoNoReferencia;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

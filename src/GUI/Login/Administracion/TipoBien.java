@@ -34,6 +34,7 @@ public class TipoBien extends javax.swing.JFrame {
         modelo = new TablaModelo();
         manejadorTipos = new ManejadorTiposBien();
         asignarDatosTiposBien();
+         this.getRootPane().setDefaultButton(jButton3);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
@@ -176,6 +177,8 @@ public class TipoBien extends javax.swing.JFrame {
         filtros = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TIPO DE BIENES");
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 36)); // NOI18N
         jLabel1.setText("TIPOS DE BIENES");
