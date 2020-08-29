@@ -267,7 +267,7 @@ public class CrearBien extends javax.swing.JFrame {
             boolean resultado = manejadorCreacionBien.crearBien(noInventario, this.usuario, noInventario, unidad, tipoBien, valor, fechaActual, tipoBien, descripcion, "---", "---",
                     "---", "---", noCUR, valorBien, division, encargado, encargado, tipoIngreso, "---", "---", "---", "---", "---", "---");
             if (resultado) {
-                JOptionPane.showMessageDialog(null, "SE INSERTO CORRECTAMENTE EL BIEN CON CODIGO " + noInventario);
+                JOptionPane.showMessageDialog(null, "SE CREO CORRECTAMENTE EL BIEN CON CODIGO " + noInventario);
                 this.setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(null, "EXISTIERON ERRORES AL INTENTAR CREAR EL BIEN DENTRO DE LA BASE DE DATOS " + noInventario);

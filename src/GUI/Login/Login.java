@@ -39,17 +39,20 @@ public class Login extends javax.swing.JFrame {
 
                 switch (mandar.getTipoUsuario()) {
                     case 1:
-                        mandarAdministracion(mandar.getUsuario());
+                        mandarAdministracion(mandar.getUsuario(),false);
                         break;
                     case 2:
-                        mandarInventario(mandar.getUsuario());
+                        mandarInventario(mandar.getUsuario(),false);
+                        break;
+                    case 3:
+                        mandarInventario(mandar.getUsuario(),true);
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "Tipo de Usuario no valido");
                         break;
                 }
-            }else{
-            JOptionPane.showMessageDialog(null, "El usuario: "+mandar.getUsuario()+" esta deshabilitado, no puede ingresar al sistema");    
+            } else {
+                JOptionPane.showMessageDialog(null, "El usuario: " + mandar.getUsuario() + " esta deshabilitado, no puede ingresar al sistema");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Datos Incorrectos, vuelve a intentar");
@@ -58,14 +61,14 @@ public class Login extends javax.swing.JFrame {
         }
     }
 
-    public void mandarAdministracion(String usuario) {
-        MenuAdministracion menu = new MenuAdministracion(usuario);
+    public void mandarAdministracion(String usuario, boolean esAmbasAreas) {
+        MenuAdministracion menu = new MenuAdministracion(usuario,esAmbasAreas);
         menu.setVisible(true);
         this.setVisible(false);
     }
 
-    public void mandarInventario(String usuario) {
-        MenuInventario menu = new MenuInventario(usuario);
+    public void mandarInventario(String usuario, boolean esAmbosAreas) {
+        MenuInventario menu = new MenuInventario(usuario,esAmbosAreas);
         menu.setVisible(true);
         this.setVisible(false);
     }

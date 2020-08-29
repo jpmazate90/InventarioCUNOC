@@ -29,27 +29,27 @@ public class ManejadorBajaBien {
     public ManejadorBajaBien() {
         conexion = ConexionBD.getInstance();
     }
-    
-    public boolean guardarBajaBien(EstructuraBajaBien baja){
-        
+
+    public boolean guardarBajaBien(EstructuraBajaBien baja) {
+
         try {
             PreparedStatement declaracion;
             declaracion = conexion.prepareStatement("INSERT INTO BAJABIEN(NOINVENTARIO,NOACUERDOCONSEJO,NOREFERENCIAAUDITORIA,FECHABAJA) VALUES (?,?,?,?);");
             declaracion.setString(1, baja.getNoInventario());
             declaracion.setString(2, baja.getNoAcuerdoConsejo());
             declaracion.setString(3, baja.getNoReferenciaAuditoria());
-            declaracion.setTimestamp(4, baja.getFechaBaja());           
+            declaracion.setTimestamp(4, baja.getFechaBaja());
             declaracion.executeUpdate();
             return true;
-            
+
         } catch (HeadlessException | SQLException e) {
             e.printStackTrace();
             return false;
         }
-        
+
     }
-    
-    public void llenarBajas(TablaModelo modelo,String noInventario, String noAcuerdo, String noReferencia, String fechaInicial, String fechaFinal){
+
+    public void llenarBajas(TablaModelo modelo, String noInventario, String noAcuerdo, String noReferencia, String fechaInicial, String fechaFinal) {
         PreparedStatement declaracion;
         try {
             boolean tieneFiltro = false;
@@ -107,7 +107,7 @@ public class ManejadorBajaBien {
                     tieneFiltro = true;
                 }
             }
-            declaracion = conexion.prepareStatement("SELECT * FROM BAJABIEN  "+filtros+"  ORDER BY FECHABAJA DESC");
+            declaracion = conexion.prepareStatement("SELECT * FROM BAJABIEN  " + filtros + "  ORDER BY FECHABAJA DESC");
             for (int i = 0; i < listaFiltros.size(); i++) {
                 declaracion.setString(i + 1, listaFiltros.get(i));
             }
@@ -123,6 +123,35 @@ public class ManejadorBajaBien {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Problema al cargar las bajas de bienes");
+        }
+    }
+
+    public boolean darDeAltaUnBien(String noInventario) {
+        try {
+            PreparedStatement declaracion;
+
+            declaracion = conexion.prepareStatement("UPDATE BIEN SET ESTADOACTUAL=1 WHERE NOINVENTARIO=?");
+            declaracion.setString(1, noInventario);
+
+            declaracion.executeUpdate();
+
+            return true;
+        } catch (HeadlessException | SQLException e) {
+            //e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean eliminarBien(String noInventario) {
+        try {
+            PreparedStatement declaracion;
+            declaracion = conexion.prepareStatement("DELETE FROM BIEN WHERE NOINVENTARIO= ?");
+            declaracion.setString(1, noInventario);
+            declaracion.executeUpdate();
+            return true;
+        } catch (HeadlessException | SQLException e) {
+            //e.printStackTrace();
+            return false;
         }
     }
 

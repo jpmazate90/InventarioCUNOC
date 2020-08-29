@@ -45,7 +45,7 @@ public class CrearUsuario extends javax.swing.JDialog {
                                     if (dpi.length() == 13) {
                                         if (!area.equals("")) {
                                             if (area.length()<=100) {
-                                                if (tipo >= 1 && tipo <= 2) {
+                                                if (tipo >= 1 && tipo <= 3) {
                                                     boolean resultado = manejador.crearUsuario(usuario, contrasena, nombre, dpi, area, tipo, estado);
                                                     if (resultado) {
                                                         JOptionPane.showMessageDialog(null, "Se ha creado con exito el usuario: " + usuario);
@@ -165,7 +165,7 @@ public class CrearUsuario extends javax.swing.JDialog {
         getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 321, 338, -1));
         getContentPane().add(dpi, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 370, 338, -1));
 
-        tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administracion", "Inventario" }));
+        tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administracion", "Inventario", "Ambos" }));
         getContentPane().add(tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 458, 338, -1));
         getContentPane().add(area, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 417, 338, -1));
 

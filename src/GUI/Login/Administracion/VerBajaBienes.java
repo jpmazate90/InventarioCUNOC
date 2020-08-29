@@ -169,6 +169,7 @@ public class VerBajaBienes extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         jLabel11.setText("jLabel11");
 
@@ -267,13 +268,21 @@ public class VerBajaBienes extends javax.swing.JDialog {
         getContentPane().add(botonImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 580, 250, -1));
 
         jLabel9.setText("Fecha y Hora del Reporte:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 590, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 580, -1, 30));
 
         textoFechaHoraReporte.setEditable(false);
-        getContentPane().add(textoFechaHoraReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 580, 310, -1));
+        getContentPane().add(textoFechaHoraReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 590, 310, -1));
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 740, -1, -1));
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 320, -1, -1));
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 730, -1, -1));
+
+        jButton2.setText("Limpiar Filtros");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 210, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -316,11 +325,24 @@ public class VerBajaBienes extends javax.swing.JDialog {
         recargarTabla();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    limpiarFiltros();
+    }//GEN-LAST:event_jButton2ActionPerformed
+public void limpiarFiltros(){
+    this.textoCheckFechaFinal.setSelected(false);
+    this.textoCheckFechaInicial.setSelected(false);
+    this.textoFechaFinal.setDate(new Date());
+    this.textoFechaInicial.setDate(new Date());
+    this.textoNoAcuerdo.setText("");
+    this.textoNoInventario.setText("");
+    this.textoNoReferencia.setText("");
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonImprimir;
     private javax.swing.JComboBox<String> filtros;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -5,6 +5,7 @@
  */
 package GUI.Login.Administracion;
 
+import GUI.Login.Inventario.MenuInventario;
 import GUI.Login.Login;
 
 /**
@@ -14,12 +15,23 @@ import GUI.Login.Login;
 public class MenuAdministracion extends javax.swing.JFrame {
 
     private String usuarioActual;
+    private boolean esAmbasAreas;
 
-    public MenuAdministracion(String usuarioActual) {
+    public MenuAdministracion(String usuarioActual, boolean esAmbos) {
         initComponents();
+        this.esAmbasAreas = esAmbos;
         this.usuarioActual = usuarioActual;
-
+        validarTipoUsuario();
     }
+    
+      public void validarTipoUsuario(){
+        if(this.esAmbasAreas){
+            this.menuInventario.setVisible(true);
+        }else{
+            this.menuInventario.setVisible(false);
+        } 
+    }
+        
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -31,6 +43,7 @@ public class MenuAdministracion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         verUsuarios = new javax.swing.JMenuItem();
@@ -44,6 +57,8 @@ public class MenuAdministracion extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        menuInventario = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MENU ADMINISTRACION");
@@ -65,14 +80,19 @@ public class MenuAdministracion extends javax.swing.JFrame {
         jLabel3.setBounds(110, 140, 430, 29);
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 2, 18)); // NOI18N
-        jLabel4.setText("ABREVIACIONES)");
+        jLabel4.setText("CADA BOTON)");
         desktopPane.add(jLabel4);
-        jLabel4.setBounds(110, 180, 430, 29);
+        jLabel4.setBounds(110, 220, 430, 29);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logoUsac.png"))); // NOI18N
         jLabel5.setText("jLabel5");
         desktopPane.add(jLabel5);
         jLabel5.setBounds(450, 110, 100, 100);
+
+        jLabel6.setFont(new java.awt.Font("Ubuntu", 2, 18)); // NOI18N
+        jLabel6.setText("ABREVIACIONES ESTAN EN ");
+        desktopPane.add(jLabel6);
+        jLabel6.setBounds(110, 180, 430, 29);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Usuarios");
@@ -158,17 +178,30 @@ public class MenuAdministracion extends javax.swing.JFrame {
 
         menuBar.add(jMenu3);
 
+        menuInventario.setText("Menu Inventario");
+
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem4.setText("Ir al Menu Inventario");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        menuInventario.add(jMenuItem4);
+
+        menuBar.add(menuInventario);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
         );
 
         pack();
@@ -208,6 +241,12 @@ public class MenuAdministracion extends javax.swing.JFrame {
      
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+     MenuInventario menu = new MenuInventario(usuarioActual, esAmbasAreas);
+     menu.setVisible(true);
+     this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem contentMenuItem;
@@ -221,13 +260,16 @@ public class MenuAdministracion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuInventario;
     private javax.swing.JMenuItem verUsuarios;
     // End of variables declaration//GEN-END:variables
 

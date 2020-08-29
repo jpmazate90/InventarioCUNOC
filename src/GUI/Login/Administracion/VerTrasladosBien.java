@@ -112,6 +112,7 @@ public class VerTrasladosBien extends javax.swing.JDialog {
         botonImprimir = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("REPORTE TRASLADOS DE BIEN");
@@ -235,6 +236,14 @@ public class VerTrasladosBien extends javax.swing.JDialog {
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 730, -1, -1));
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 320, -1, -1));
 
+        jButton4.setText("LIMPIAR FILTROS");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 220, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -290,6 +299,19 @@ public class VerTrasladosBien extends javax.swing.JDialog {
         generarReporte();
 
     }//GEN-LAST:event_botonImprimirActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+      limpiarCampos();
+    }//GEN-LAST:event_jButton4ActionPerformed
+    public void limpiarCampos(){
+        this.filtroCheckFechaFinal.setSelected(false);
+        this.filtroCheckFechaInicial.setSelected(false);
+        this.filtroEncargadoAnterior.setText("");
+        this.filtroEncargadoNuevo.setText("");
+        this.filtroFechaFinal.setDate(new Date());
+        this.filtroFechaInicial.setDate(new Date());
+    }
+    
     public void generarReporte() {
 
         if (existenElementosParaImprimir()) {
@@ -354,6 +376,7 @@ public class VerTrasladosBien extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
