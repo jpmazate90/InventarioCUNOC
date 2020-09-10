@@ -114,7 +114,7 @@ public class ManejadorPersonal {
             declaracion.setString(5, puesto);
             declaracion.setString(6, area);
             declaracion.setString(7, no);
-            declaracion.executeUpdate();
+             declaracion.executeUpdate();
             return true;
         } catch (HeadlessException | SQLException e) {
             return false;

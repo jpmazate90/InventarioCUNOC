@@ -366,7 +366,7 @@ public class CrearBien extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 12, -1, -1));
 
         jLabel4.setText("No Unidad Academica:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 112, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         Jlabel.setText("Tipo de Bien:");
         jPanel1.add(Jlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
